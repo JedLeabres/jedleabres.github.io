@@ -140,7 +140,7 @@ footer a:hover{color:var(--red)}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#tools">Tools</a><a href="#work">Work</a><a href="#workflow">Workflow</a><a href="#services">Services</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#tools">Tools</a><a href="#work">Work</a><a href="#workflow">Workflow</a><a href="#services">Services</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -205,8 +205,6 @@ footer a:hover{color:var(--red)}
   </div>
 </section>
 
-
-
 <section class="contact" id="contact">
   <div class="wrap">
     <p class="mono reveal" style="color:var(--red);margin:0 0 10px">Join the project</p>
@@ -218,80 +216,4 @@ footer a:hover{color:var(--red)}
   </div>
 </section>
 
-<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino</span><a href="#top">Back to top ↑</a></div></footer>
-
-<script>
-/* EDIT YOUR ADS HERE. link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
-const ADS = [
-  { title: "UGC avatar ad: product demo", desc: "AI avatar presenter with a three-second hook, product demo and CTA.", kind: "UGC avatar", lang: "English", platform: "TikTok", link: "", video: "", poster: "" },
-  { title: "Pixar-style story ad", desc: "3D animated character story that moves from problem to product reveal.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "", poster: "" },
-  { title: "Realistic AI drama", desc: "Live-action look AI short with real-person characters and a story hook.", kind: "Realistic AI", lang: "English", platform: "YouTube Shorts", link: "", video: "", poster: "" },
-  { title: "Disney-style animated ad", desc: "Storybook 3D characters and a warm, shareable tone.", kind: "3D animated", lang: "English", platform: "Facebook Reels", link: "", video: "", poster: "" },
-  { title: "Filipino UGC ad", desc: "Tagalog avatar ad written for a Filipino audience.", kind: "UGC avatar", lang: "Filipino", platform: "TikTok", link: "", video: "", poster: "" },
-  { title: "3D explainer with cutaway", desc: "Animated body or product cutaway that explains the benefit fast.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "", poster: "" },
-  { title: "Realistic AI testimonial", desc: "Realistic AI person sharing a before and after story.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", link: "", video: "", poster: "" },
-  { title: "Filipino animated story", desc: "Animated story ad voiced in Filipino for local feeds.", kind: "3D animated", lang: "Filipino", platform: "YouTube Shorts", link: "", video: "", poster: "" }
-];
-const rail = document.getElementById('grid'), filtersEl = document.getElementById('filters');
-let current = 'All';
-const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
-const safe = u => /^https?:\/\//i.test(u || '') ? u : '';
-function card(ad) {
-  const c = el('article', 'ad'); c.dataset.keys = ad.kind + '|' + ad.lang;
-  const vid = safe(ad.video), link = safe(ad.link); let m;
-  if (vid) {
-    m = el('div', 'thumb'); const v = document.createElement('video');
-    v.controls = true; v.playsInline = true; v.preload = 'none'; v.src = vid;
-    if (safe(ad.poster)) v.poster = ad.poster; m.appendChild(v);
-  } else {
-    m = link ? el('a', 'thumb') : el('div', 'thumb');
-    if (link) { m.href = link; m.target = '_blank'; m.rel = 'noopener'; m.setAttribute('aria-label', 'Watch ' + ad.title + ' on ' + ad.platform); }
-    m.appendChild(el('span', 'play')); m.appendChild(el('span', 'chip', ad.platform));
-    if (!link) m.appendChild(el('span', 'soon', 'Link coming soon'));
-  }
-  const info = el('div', 'info');
-  info.appendChild(el('small', '', ad.kind + ' · ' + ad.lang));
-  info.appendChild(el('h3', '', ad.title)); info.appendChild(el('p', '', ad.desc));
-  c.appendChild(m); c.appendChild(info); return c;
-}
-function apply() {
-  rail.querySelectorAll('.ad').forEach(c => { c.hidden = current !== 'All' && !c.dataset.keys.split('|').includes(current); });
-  rail.scrollTo({ left: 0, behavior: 'smooth' });
-}
-(function build() {
-  ADS.forEach(a => rail.appendChild(card(a)));
-  const set = ['All'];
-  ADS.forEach(a => [a.kind, a.lang].forEach(k => { if (k && !set.includes(k)) set.push(k); }));
-  set.forEach(n => {
-    const b = el('button', '', n); b.type = 'button'; b.setAttribute('aria-pressed', String(n === current));
-    b.onclick = () => { current = n; filtersEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); apply(); };
-    filtersEl.appendChild(b);
-  });
-  rail.querySelectorAll('video').forEach(v => v.addEventListener('play', () => rail.querySelectorAll('video').forEach(o => { if (o !== v) o.pause(); })));
-})();
-document.getElementById('prev').onclick = () => rail.scrollBy({ left: -330, behavior: 'smooth' });
-document.getElementById('next').onclick = () => rail.scrollBy({ left: 330, behavior: 'smooth' });
-(function progress() {
-  const bar = document.getElementById('prog'); let tick = false;
-  const upd = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(Math.max(scrollY / h, 0), 1) : 0) + ')'; tick = false; };
-  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
-  addEventListener('resize', upd); upd();
-})();
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  e.target.classList.add('on'); io.unobserve(e.target);
-  const n = e.target.querySelector('[data-n]');
-  if (n && !still) { const to = +n.dataset.n, t0 = performance.now();
-    (function f(t) { const p = Math.min((t - t0) / 1200, 1); n.textContent = Math.max(1, Math.round(to * p)); if (p < 1) requestAnimationFrame(f); })(t0); }
-}), { threshold: .15 });
-document.querySelectorAll('.reveal').forEach(n => io.observe(n));
-const cb = document.getElementById('copy-email');
-cb.onclick = () => {
-  const t = document.getElementById('email').textContent;
-  const done = () => { cb.textContent = 'Copied'; setTimeout(() => cb.textContent = 'Copy email', 1800); };
-  try { navigator.clipboard.writeText(t).then(done, () => cb.textContent = 'Copy failed'); } catch (e) { cb.textContent = 'Copy failed'; }
-};
-</script>
-</body>
-</html>
+<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino</span><a href="#top">Back to top
