@@ -256,8 +256,7 @@ const ICON = {
   play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
   pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
   vol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>',
-  mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg>',
-  full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v2H7v3H5V5zm9 0h5v5h-2V7h-3V5zM5 14h2v3h3v2H5v-5zm12 0h2v5h-5v-2h3v-3z"/></svg>'
+  mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg>'
 };
 const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
 function vbtn(cls, label, a, b) {
@@ -272,13 +271,11 @@ function vctl(v, thumb) {
   const seek = el('div', 'vp'); seek.tabIndex = 0; seek.setAttribute('role', 'slider'); seek.setAttribute('aria-label', 'Seek');
   const track = el('span'), fill = document.createElement('i'); track.appendChild(fill); seek.appendChild(track);
   const mu = vbtn('', 'Mute', ICON.vol, ICON.mute);
-  const fs = vbtn('', 'Fullscreen', ICON.full);
   [pp, mu].forEach(b => b.querySelectorAll('span').forEach(s => s.removeAttribute('style')));
-  bar.append(pp, seek, time, mu, fs);
+  bar.append(pp, seek, time, mu);
   const toggle = () => { v.paused ? v.play() : v.pause(); };
   pp.onclick = toggle; thumb.addEventListener('click', e => { if (e.target === v || e.target.classList.contains('play')) toggle(); });
   mu.onclick = () => { v.muted = !v.muted; };
-  fs.onclick = () => { (v.requestFullscreen || v.webkitRequestFullscreen || v.webkitEnterFullscreen || (() => {})).call(v); };
   const upd = () => { time.textContent = fmt(v.currentTime) + ' / ' + fmt(v.duration); fill.style.transform = 'scaleX(' + (v.duration ? v.currentTime / v.duration : 0) + ')'; seek.setAttribute('aria-valuenow', Math.round(v.currentTime)); };
   const state = () => { thumb.classList.toggle('paused', v.paused); pp.classList.toggle('on', !v.paused); pp.setAttribute('aria-label', v.paused ? 'Play' : 'Pause'); mu.classList.toggle('on', v.muted); mu.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); };
   ['timeupdate', 'loadedmetadata', 'durationchange'].forEach(ev => v.addEventListener(ev, upd));
