@@ -61,6 +61,22 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:var(--red);display:grid;place-items:center;transition:transform .3s}
 .ad:hover .play{transform:scale(1.12)}
 .play::after{content:"";border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.thumb.vid{cursor:pointer}
+.thumb.vid:not(.paused) .play{opacity:0;pointer-events:none}
+.play{transition:transform .3s,opacity .2s}
+.vc{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.8));display:flex;align-items:center;gap:10px;color:#f4f4f4;cursor:default}
+.vb{flex:0 0 auto;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer;color:#f4f4f4;background:none;border:1px solid #f4f4f4;transition:background .2s,color .2s,border-color .2s}
+.vb:hover{background:#f4f4f4;color:#111}
+.vb.main{background:var(--red);border-color:var(--red);color:#fff}
+.vb.main:hover{background:#f4f4f4;border-color:#f4f4f4;color:#111}
+.vb svg{width:16px;height:16px;fill:currentColor;display:block}
+.vb .i2{display:none}
+.vb.on .i1{display:none}.vb.on .i2{display:block}
+.vp{flex:1;min-width:0;padding:10px 0;cursor:pointer;touch-action:none}
+.vp span{display:block;height:4px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden}
+.vp i{display:block;height:100%;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left}
+.vt{flex:0 0 auto;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#f4f4f4}
+.vb:focus-visible,.vp:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .chip,.soon{position:absolute;left:14px;color:#f4f4f4;background:rgba(0,0,0,.6);border-radius:99px;padding:4px 10px;font-family:var(--mono);font-size:11px;text-transform:uppercase}
 .chip{top:14px}.soon{bottom:14px;color:#bdbdbd}
 .info{padding:18px 20px 22px}
@@ -236,13 +252,53 @@ const rail = document.getElementById('grid'), filtersEl = document.getElementByI
 let current = 'All';
 const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x !== undefined) n.textContent = x; return n; };
 const safe = u => /^https?:\/\//i.test(u || '') ? u : '';
+const ICON = {
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+  pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>',
+  vol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>',
+  mute: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.6 3 2.4-2.4-1.4-1.4-2.4 2.4-2.4-2.4-1.4 1.4 2.4 2.4-2.4 2.4 1.4 1.4 2.4-2.4 2.4 2.4 1.4-1.4z"/></svg>',
+  full: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v2H7v3H5V5zm9 0h5v5h-2V7h-3V5zM5 14h2v3h3v2H5v-5zm12 0h2v5h-5v-2h3v-3z"/></svg>'
+};
+const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+function vbtn(cls, label, a, b) {
+  const x = el('button', 'vb ' + cls); x.type = 'button'; x.setAttribute('aria-label', label);
+  x.innerHTML = '<span class="i1">' + a + '</span>' + (b ? '<span class="i2">' + b + '</span>' : '');
+  x.querySelectorAll('span').forEach(s => s.style.display = ''); return x;
+}
+function vctl(v, thumb) {
+  const bar = el('div', 'vc');
+  const pp = vbtn('main', 'Play', ICON.play, ICON.pause);
+  const time = el('span', 'vt', '0:00 / 0:00');
+  const seek = el('div', 'vp'); seek.tabIndex = 0; seek.setAttribute('role', 'slider'); seek.setAttribute('aria-label', 'Seek');
+  const track = el('span'), fill = document.createElement('i'); track.appendChild(fill); seek.appendChild(track);
+  const mu = vbtn('', 'Mute', ICON.vol, ICON.mute);
+  const fs = vbtn('', 'Fullscreen', ICON.full);
+  [pp, mu].forEach(b => b.querySelectorAll('span').forEach(s => s.removeAttribute('style')));
+  bar.append(pp, seek, time, mu, fs);
+  const toggle = () => { v.paused ? v.play() : v.pause(); };
+  pp.onclick = toggle; thumb.addEventListener('click', e => { if (e.target === v || e.target.classList.contains('play')) toggle(); });
+  mu.onclick = () => { v.muted = !v.muted; };
+  fs.onclick = () => { (v.requestFullscreen || v.webkitRequestFullscreen || v.webkitEnterFullscreen || (() => {})).call(v); };
+  const upd = () => { time.textContent = fmt(v.currentTime) + ' / ' + fmt(v.duration); fill.style.transform = 'scaleX(' + (v.duration ? v.currentTime / v.duration : 0) + ')'; seek.setAttribute('aria-valuenow', Math.round(v.currentTime)); };
+  const state = () => { thumb.classList.toggle('paused', v.paused); pp.classList.toggle('on', !v.paused); pp.setAttribute('aria-label', v.paused ? 'Play' : 'Pause'); mu.classList.toggle('on', v.muted); mu.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); };
+  ['timeupdate', 'loadedmetadata', 'durationchange'].forEach(ev => v.addEventListener(ev, upd));
+  ['play', 'pause', 'ended', 'volumechange'].forEach(ev => v.addEventListener(ev, state));
+  const jump = e => { const r = seek.getBoundingClientRect(); if (v.duration) v.currentTime = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * v.duration; };
+  let drag = false;
+  seek.addEventListener('pointerdown', e => { drag = true; seek.setPointerCapture(e.pointerId); jump(e); });
+  seek.addEventListener('pointermove', e => { if (drag) jump(e); });
+  seek.addEventListener('pointerup', () => drag = false);
+  seek.addEventListener('keydown', e => { if (e.key === 'ArrowRight') v.currentTime += 5; if (e.key === 'ArrowLeft') v.currentTime -= 5; });
+  upd(); state(); return bar;
+}
 function card(ad) {
   const c = el('article', 'ad'); c.dataset.keys = ad.kind + '|' + ad.lang;
   const vid = safe(ad.video), link = safe(ad.link); let m;
   if (vid) {
-    m = el('div', 'thumb'); const v = document.createElement('video');
-    v.controls = true; v.playsInline = true; v.preload = 'none'; v.src = vid;
+    m = el('div', 'thumb vid paused'); const v = document.createElement('video');
+    v.playsInline = true; v.preload = 'metadata'; v.src = vid;
     if (safe(ad.poster)) v.poster = ad.poster; m.appendChild(v);
+    m.appendChild(el('span', 'play')); m.appendChild(vctl(v, m));
   } else {
     m = link ? el('a', 'thumb') : el('div', 'thumb');
     if (link) { m.href = link; m.target = '_blank'; m.rel = 'noopener'; m.setAttribute('aria-label', 'Watch ' + ad.title + ' on ' + ad.platform); }
