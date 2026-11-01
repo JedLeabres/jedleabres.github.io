@@ -322,12 +322,12 @@ footer a:hover{color:var(--red)}
 <footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino · Español (LatAm)</span><span>Built with AI + research</span><a href="#top">Back to top ↑</a></div></footer>
 
 <script>
-/* EDIT YOUR ADS HERE. Add featured: true to a card to pin it first and highlight it.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
+/* EDIT YOUR ADS HERE. Add featured: true to a card to pin it first and highlight it.  tags: ["Song"] adds extra categories.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
 const ADS = [
   { title: "1 Piece, 3 Ways: Cream Jeans Styling Ad", desc: "UGC-style fashion ad that styles one pair of cream jeans for work, date night and the weekend, with word-by-word captions and a save-and-shop call to action.", kind: "UGC avatar", lang: "English", platform: "TikTok", link: "", video: "https://jedleabres.github.io/cream_jeans_3_ways_ad_karaoke.mp4", poster: "" },
   { title: "Cherry Cardigan: 3D Animated Fashion Story", desc: "A 3D animated storybook ad about a tiny seamstress who discovers a cream cherry-embroidered cardigan in a glowing world of yarn, with sparkle reveals and close-ups that make the knit the hero.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "https://jedleabres.github.io/ugcad.mp4", poster: "" },
   { title: "A Day in Her Life: Cinematic AI Drama", desc: "A 58-second emotional short that follows a grandmother from morning light to evening, told in warm autumn scenes with highlighted word-by-word captions.", kind: "Realistic AI", lang: "English", platform: "YouTube Shorts", link: "", video: "https://jedleabres.github.io/grandmadrama.mp4", poster: "" },
-  { title: "Her Garden Routine: 3D Animated Wellness Story", desc: "A Pixar-style 3D animated story ad that follows a woman through her daily wellness routine, from garden yoga and fresh herbs to a product reveal, with warm golden-hour scenes and highlighted word-by-word captions.", kind: "3D animated", lang: "English", platform: "Facebook Reels", link: "", video: "https://jedleabres.github.io/assets/3d animation/3danim.mp4", poster: "" },
+  { title: "Her Garden Routine: 3D Animated Wellness Story", desc: "A Pixar-style 3D animated story set to a song, following a woman through her daily wellness routine, from garden yoga and fresh herbs to a product reveal, with warm golden-hour scenes and highlighted word-by-word captions.", kind: "3D animated", tags: ["Song"], lang: "English", platform: "Facebook Reels", featured: true, badge: "Longest + best edit", link: "", video: "https://jedleabres.github.io/assets/3d animation/3danim.mp4", poster: "" },
   { title: "AI Me Explains: UGC Ads with Google Flow & Veo 3", desc: "An AI video of myself talking straight to camera, walking through how I create UGC ads in Google Flow with Veo 3: from a starting image to smooth video clips, with highlighted captions.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", featured: true, link: "", video: "https://jedleabres.github.io/asianjed.mp4", poster: "" },
   { title: "3D explainer with cutaway", desc: "Animated body or product cutaway that explains the benefit fast.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "", poster: "" },
   { title: "Meet Marcus: Gym Bro Comedy Skit", desc: "Realistic AI comedy short about a loud, muscle-bound gym regular, with deadpan narration and punchy highlighted captions built to hold attention to the last second.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", link: "", video: "https://jedleabres.github.io/gymbro.mp4", poster: "" },
@@ -412,7 +412,7 @@ function hoverPreview(card, v) {
   });
 }
 function card(ad) {
-  const c = el('article', 'ad'); c.dataset.keys = ad.kind + '|' + ad.lang;
+  const c = el('article', 'ad'); c.dataset.keys = [ad.kind, ad.lang].concat(ad.tags || []).join('|');
   const vid = safe(ad.video), link = safe(ad.link); let m;
   if (vid) {
     m = el('div', 'thumb vid paused'); const v = document.createElement('video');
@@ -427,7 +427,7 @@ function card(ad) {
     if (!link) m.appendChild(el('span', 'soon', 'Link coming soon'));
   }
   const info = el('div', 'info');
-  info.appendChild(el('small', '', ad.kind + ' · ' + ad.lang));
+  info.appendChild(el('small', '', [ad.kind].concat(ad.tags || [], ad.lang).join(' · ')));
   info.appendChild(el('h3', '', ad.title)); info.appendChild(el('p', '', ad.desc));
   c.appendChild(m); c.appendChild(info); return c;
 }
@@ -440,7 +440,7 @@ const live = list => list.filter(a => safe(a.video) || safe(a.link)).sort((a, b)
   const LIVE = live(ADS);
   LIVE.forEach(a => rail.appendChild(card(a)));
   const set = ['All'];
-  LIVE.forEach(a => [a.kind, a.lang].forEach(k => { if (k && !set.includes(k)) set.push(k); }));
+  LIVE.forEach(a => [a.kind, a.lang].concat(a.tags || []).forEach(k => { if (k && !set.includes(k)) set.push(k); }));
   set.forEach(n => {
     const b = el('button', '', n); b.type = 'button'; b.setAttribute('aria-pressed', String(n === current));
     b.onclick = () => { current = n; filtersEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); apply(); };
