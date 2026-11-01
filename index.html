@@ -62,10 +62,14 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .filters button{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg);background:none;border:1px solid var(--line);border-radius:99px;padding:9px 16px;cursor:pointer;transition:all .2s}
 .filters button:hover{border-color:var(--fg)}
 .filters button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 24px;padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scroll-padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scrollbar-width:none}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-20px 0 -16px;padding:24px 24px 40px;padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scroll-padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
 .ad{flex:0 0 clamp(250px,28vw,320px);scroll-snap-align:start;background:var(--card);border-radius:20px;overflow:hidden}
 .ad[hidden]{display:none}
+.ad{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.ad.hovering{transform:scale(1.06);position:relative;z-index:3;box-shadow:0 26px 50px -22px rgba(0,0,0,.5)}
+.ad.featured.hovering{box-shadow:0 0 0 5px color-mix(in srgb,var(--red) 22%,transparent),0 30px 60px -20px var(--red)}
+@media(prefers-reduced-motion:reduce){.ad.hovering{transform:none}}
 .thumb{position:relative;display:block;aspect-ratio:9/13;background:#000;background-image:radial-gradient(circle,#333 1.2px,transparent 1.5px);background-size:16px 16px;overflow:hidden}
 .thumb video{width:100%;height:100%;object-fit:cover;display:block}
 .play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:var(--red);display:grid;place-items:center;transition:transform .3s}
@@ -184,7 +188,7 @@ footer a:hover{color:var(--red)}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#tools">Tools</a><a href="#work">Work</a><a href="#workflow">Workflow</a><a href="#services">Services</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -195,16 +199,6 @@ footer a:hover{color:var(--red)}
   </div>
 </header>
 
-<section id="tools">
-  <div class="wrap">
-    <h2 class="reveal">The tools I work with.</h2>
-    <p class="mono reveal" style="color:var(--red);margin:0 0 14px">AI platforms I use for work</p>
-    <div class="tools"><span class="tool reveal">Claude</span><span class="tool reveal">ChatGPT</span><span class="tool reveal">Google Flow</span><span class="tool reveal">Higgsfield</span></div>
-    <p class="mono reveal" style="color:var(--red);margin:40px 0 14px">Editing</p>
-    <div class="tools"><span class="tool reveal">CapCut</span><span class="tool reveal">Premiere Pro</span><span class="tool reveal">DaVinci Resolve</span></div>
-  </div>
-</section>
-
 <section id="work">
   <div class="wrap head">
     <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">Selected ads</p><h2 style="margin:0">Take a look.<br><span style="color:var(--mute)">Then pick your style.</span></h2></div>
@@ -213,10 +207,6 @@ footer a:hover{color:var(--red)}
   <div class="rail" id="grid"></div>
   <div class="wrap arrows"><button type="button" id="prev" aria-label="Previous">‹</button><button type="button" id="next" aria-label="Next">›</button></div>
 </section>
-
-<section id="workflow"><div class="wrap"><p class="mono reveal" style="color:var(--red);margin:0 0 10px">How I work</p><h2 class="reveal">My workflow, per ad type.</h2><div class="wf"><div class="wfc dk reveal"><span class="mono">UGC</span><h3>Avatar ads</h3><ol><li><b>Brief and hook</b><span>Product, audience and a three-second hook.</span><i>Claude / ChatGPT</i></li><li><b>Script</b><span>Written in English or Filipino with a clear CTA.</span><i>Claude / ChatGPT</i></li><li><b>Avatar and voice</b><span>Presenter, lip-sync and voiceover.</span><i>Higgsfield</i></li><li><b>B-roll and product shots</b><span>Demo clips that back up the claim.</span><i>Google Flow</i></li><li><b>Edit</b><span>Cuts, captions, sound and CTA.</span><i>CapCut</i></li></ol></div><div class="wfc  reveal"><span class="mono">Animation</span><h3>Pixar and Disney style</h3><ol><li><b>Story and character brief</b><span>Problem to product reveal, in a few beats.</span><i>Claude</i></li><li><b>Character and scene prompts</b><span>Consistent 3D look across every shot.</span><i>ChatGPT</i></li><li><b>Animate the shots</b><span>Generate and select the best takes.</span><i>Google Flow / Higgsfield</i></li><li><b>Voice, sound and music</b><span>Voiced in English or Filipino.</span><i>Editing suite</i></li><li><b>Final edit and color</b><span>Pacing, polish and export.</span><i>Premiere / DaVinci</i></li></ol></div><div class="wfc  reveal"><span class="mono">Realistic AI</span><h3>Drama and testimonial</h3><ol><li><b>Concept and hook</b><span>Story angle that earns the first second.</span><i>Claude</i></li><li><b>Character and shot prompts</b><span>Real-person look, locked outfit and setting.</span><i>ChatGPT</i></li><li><b>Generate and pick takes</b><span>Keep only the most believable shots.</span><i>Google Flow</i></li><li><b>Cleanup and pacing edit</b><span>Trim, grade and match audio.</span><i>CapCut / Premiere</i></li><li><b>Export per platform</b><span>TikTok, Reels and Shorts specs.</span><i>Final delivery</i></li></ol></div></div></div></section>
-
-<section id="mytool"><div class="wrap"><div class="mytool reveal"><span class="mono">Built by me</span><h2>My own tool for faster ads.</h2><p class="lead">I created a custom tool to streamline my workflow, so a whole ad can be set up from a single prompt instead of one scene at a time.</p><div class="feat"><div><h3>Multiple scenes</h3><p>Plan and generate every scene of an ad together.</p></div><div><h3>Multiple avatars</h3><p>Bring several presenters or characters into the same ad.</p></div><div><h3>Multiple backgrounds</h3><p>Switch settings across scenes without starting over.</p></div></div><p class="one"><b>//</b> All in 1 prompt</p></div></div></section>
 
 <section id="services">
   <div class="wrap">
@@ -227,6 +217,20 @@ footer a:hover{color:var(--red)}
       <div class="svc reveal"><div><span class="mono">Formats</span><h3>Every platform</h3></div><p>TikTok, Facebook Reels, Instagram Reels and YouTube Shorts.</p></div>
       <div class="svc reveal"><div><span class="mono">Languages</span><h3>English and Filipino</h3></div><p>Mostly English ads, with growing work for Filipino audiences.</p></div>
     </div>
+  </div>
+</section>
+
+<section id="workflow"><div class="wrap"><p class="mono reveal" style="color:var(--red);margin:0 0 10px">How I work</p><h2 class="reveal">My workflow, per ad type.</h2><div class="wf"><div class="wfc dk reveal"><span class="mono">UGC</span><h3>Avatar ads</h3><ol><li><b>Brief and hook</b><span>Product, audience and a three-second hook.</span><i>Claude / ChatGPT</i></li><li><b>Script</b><span>Written in English or Filipino with a clear CTA.</span><i>Claude / ChatGPT</i></li><li><b>Avatar and voice</b><span>Presenter, lip-sync and voiceover.</span><i>Higgsfield</i></li><li><b>B-roll and product shots</b><span>Demo clips that back up the claim.</span><i>Google Flow</i></li><li><b>Edit</b><span>Cuts, captions, sound and CTA.</span><i>CapCut</i></li></ol></div><div class="wfc  reveal"><span class="mono">Animation</span><h3>Pixar and Disney style</h3><ol><li><b>Story and character brief</b><span>Problem to product reveal, in a few beats.</span><i>Claude</i></li><li><b>Character and scene prompts</b><span>Consistent 3D look across every shot.</span><i>ChatGPT</i></li><li><b>Animate the shots</b><span>Generate and select the best takes.</span><i>Google Flow / Higgsfield</i></li><li><b>Voice, sound and music</b><span>Voiced in English or Filipino.</span><i>Editing suite</i></li><li><b>Final edit and color</b><span>Pacing, polish and export.</span><i>Premiere / DaVinci</i></li></ol></div><div class="wfc  reveal"><span class="mono">Realistic AI</span><h3>Drama and testimonial</h3><ol><li><b>Concept and hook</b><span>Story angle that earns the first second.</span><i>Claude</i></li><li><b>Character and shot prompts</b><span>Real-person look, locked outfit and setting.</span><i>ChatGPT</i></li><li><b>Generate and pick takes</b><span>Keep only the most believable shots.</span><i>Google Flow</i></li><li><b>Cleanup and pacing edit</b><span>Trim, grade and match audio.</span><i>CapCut / Premiere</i></li><li><b>Export per platform</b><span>TikTok, Reels and Shorts specs.</span><i>Final delivery</i></li></ol></div></div></div></section>
+
+<section id="mytool"><div class="wrap"><div class="mytool reveal"><span class="mono">Built by me</span><h2>My own tool for faster ads.</h2><p class="lead">I created a custom tool to streamline my workflow, so a whole ad can be set up from a single prompt instead of one scene at a time.</p><div class="feat"><div><h3>Multiple scenes</h3><p>Plan and generate every scene of an ad together.</p></div><div><h3>Multiple avatars</h3><p>Bring several presenters or characters into the same ad.</p></div><div><h3>Multiple backgrounds</h3><p>Switch settings across scenes without starting over.</p></div></div><p class="one"><b>//</b> All in 1 prompt</p></div></div></section>
+
+<section id="tools">
+  <div class="wrap">
+    <h2 class="reveal">The tools I work with.</h2>
+    <p class="mono reveal" style="color:var(--red);margin:0 0 14px">AI platforms I use for work</p>
+    <div class="tools"><span class="tool reveal">Claude</span><span class="tool reveal">ChatGPT</span><span class="tool reveal">Google Flow</span><span class="tool reveal">Higgsfield</span></div>
+    <p class="mono reveal" style="color:var(--red);margin:40px 0 14px">Editing</p>
+    <div class="tools"><span class="tool reveal">CapCut</span><span class="tool reveal">Premiere Pro</span><span class="tool reveal">DaVinci Resolve</span></div>
   </div>
 </section>
 
@@ -267,8 +271,6 @@ footer a:hover{color:var(--red)}
     </div>
   </div>
 </section>
-
-
 
 <section class="built" id="built">
   <div class="wrap">
@@ -335,19 +337,41 @@ function vctl(v, thumb) {
   [pp, mu].forEach(b => b.querySelectorAll('span').forEach(s => s.removeAttribute('style')));
   bar.append(pp, seek, time, mu);
   const toggle = () => { v.paused ? v.play() : v.pause(); };
-  pp.onclick = toggle; thumb.addEventListener('click', e => { if (e.target === v || e.target.classList.contains('play')) toggle(); });
-  mu.onclick = () => { v.muted = !v.muted; };
+  pp.onclick = () => { v._preview = false; toggle(); };
+  thumb.addEventListener('click', e => {
+    if (e.target !== v && !e.target.classList.contains('play')) return;
+    if (v._preview) { v._preview = false; v.muted = false; return; } /* click during a hover preview: keep playing, with sound */
+    toggle();
+  });
+  mu.onclick = () => { v._preview = false; v.muted = !v.muted; };
   const upd = () => { time.textContent = fmt(v.currentTime) + ' / ' + fmt(v.duration); fill.style.transform = 'scaleX(' + (v.duration ? v.currentTime / v.duration : 0) + ')'; seek.setAttribute('aria-valuenow', Math.round(v.currentTime)); };
   const state = () => { thumb.classList.toggle('paused', v.paused); pp.classList.toggle('on', !v.paused); pp.setAttribute('aria-label', v.paused ? 'Play' : 'Pause'); mu.classList.toggle('on', v.muted); mu.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute'); };
   ['timeupdate', 'loadedmetadata', 'durationchange'].forEach(ev => v.addEventListener(ev, upd));
   ['play', 'pause', 'ended', 'volumechange'].forEach(ev => v.addEventListener(ev, state));
   const jump = e => { const r = seek.getBoundingClientRect(); if (v.duration) v.currentTime = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * v.duration; };
   let drag = false;
-  seek.addEventListener('pointerdown', e => { drag = true; seek.setPointerCapture(e.pointerId); jump(e); });
+  seek.addEventListener('pointerdown', e => { v._preview = false; drag = true; seek.setPointerCapture(e.pointerId); jump(e); });
   seek.addEventListener('pointermove', e => { if (drag) jump(e); });
   seek.addEventListener('pointerup', () => drag = false);
   seek.addEventListener('keydown', e => { if (e.key === 'ArrowRight') v.currentTime += 5; if (e.key === 'ArrowLeft') v.currentTime -= 5; });
   upd(); state(); return bar;
+}
+const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+function hoverPreview(card, v) {
+  if (!canHover) return;
+  card.addEventListener('pointerenter', e => {
+    if (e.pointerType !== 'mouse') return;
+    card.classList.add('hovering');
+    const busy = [...rail.querySelectorAll('video')].some(o => o !== v && !o.paused && !o._preview);
+    if (v.paused && !busy) {
+      v._preview = true; v.muted = true;
+      const pr = v.play(); if (pr && pr.catch) pr.catch(() => { v._preview = false; });
+    }
+  });
+  card.addEventListener('pointerleave', () => {
+    card.classList.remove('hovering');
+    if (v._preview) { v._preview = false; v.pause(); v.currentTime = 0; }
+  });
 }
 function card(ad) {
   const c = el('article', 'ad'); c.dataset.keys = ad.kind + '|' + ad.lang;
@@ -356,7 +380,7 @@ function card(ad) {
     m = el('div', 'thumb vid paused'); const v = document.createElement('video');
     v.playsInline = true; v.preload = 'metadata'; v.src = vid;
     if (safe(ad.poster)) v.poster = ad.poster; m.appendChild(v);
-    m.appendChild(el('span', 'play')); m.appendChild(vctl(v, m));
+    m.appendChild(el('span', 'play')); m.appendChild(vctl(v, m)); hoverPreview(c, v);
     if (ad.featured) { c.classList.add('featured'); m.appendChild(el('span', 'badge', 'Meet Jed')); }
   } else {
     m = link ? el('a', 'thumb') : el('div', 'thumb');
