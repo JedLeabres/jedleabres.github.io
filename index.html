@@ -15,11 +15,9 @@
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f4f4;--fg:#111;--mute:#6b6b6b;--card:#fff;--line:#dcdcdc;--red:#1b2f6b;
+:root{--bg:#f8f3e8;--fg:#111;--mute:#6f685c;--card:#fffdf8;--line:#e4dccb;--red:#1b2f6b;
 --dot:"Doto","Space Mono",ui-monospace,Menlo,monospace;--mono:"Space Mono",ui-monospace,Menlo,monospace;--sans:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
 color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#7f9cff;--bg:#0b0b0b;--fg:#f4f4f4;--mute:#9a9a9a;--card:#171717;--line:#2a2a2a;color-scheme:dark}}
-:root[data-theme="dark"]{--red:#7f9cff;--bg:#0b0b0b;--fg:#f4f4f4;--mute:#9a9a9a;--card:#171717;--line:#2a2a2a;color-scheme:dark}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -163,6 +161,9 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 footer{border-top:1px solid var(--line);padding:32px 0;color:var(--mute)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a:hover{color:var(--red)}
+/* text shadows: crisp offset in the accent color */
+.hero h1,h2{text-shadow:4px 4px 0 color-mix(in srgb,var(--red) 30%,transparent)}
+.logo,.svc h3,.wfc h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}.reveal{opacity:1;transform:none}}
