@@ -46,6 +46,9 @@ background-image:radial-gradient(circle,#2a2a2a 1.4px,transparent 1.6px);backgro
 .btn{display:inline-block;background:#f4f4f4;color:#111;border-radius:99px;padding:13px 26px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.04em;transition:background .2s,color .2s}
 .btn:hover{background:var(--red);color:#fff}
 .btn.dk{background:var(--fg);color:var(--bg)}
+.btn.ghost{background:none;color:#f4f4f4;border:1px solid #f4f4f4}
+.btn.ghost:hover{background:#f4f4f4;color:#111}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
 section{padding:96px 0}
 h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-height:1;margin:0 0 36px;letter-spacing:-.01em}
 .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
@@ -139,11 +142,22 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .mytool .one b{color:var(--red);font-weight:400}
 .prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:color-mix(in srgb,var(--fg) 10%,transparent)}
 .prog i{display:block;height:100%;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left;will-change:transform}
+.built .lead{color:var(--mute);max-width:640px;font-size:18px;margin:0 0 32px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+.pcard .mono{color:var(--red)}
+.pcard h3{font-family:var(--dot);font-weight:800;font-size:clamp(24px,3vw,30px);line-height:1;margin:10px 0 10px}
+.pcard p{margin:0;color:var(--mute);font-size:15px}
+.built .one{margin-top:28px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.built .one b{color:var(--red);font-weight:400}
 .tl{display:grid;gap:16px}
-.step{display:grid;grid-template-columns:160px 1fr;gap:24px;background:var(--card);border-radius:20px;padding:28px}
+.step{display:grid;grid-template-columns:190px 1fr;gap:24px;background:var(--card);border-radius:20px;padding:28px}
 .step .mono{color:var(--red)}
 .step h3{margin:0 0 8px;font-size:22px}
 .step p{margin:0;color:var(--mute)}
+.step .school{margin:-2px 0 10px;font-weight:600;color:var(--fg)}
+.step ul{margin:10px 0 0;padding-left:20px;color:var(--mute)}
+.step li{margin:6px 0}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .tags span{font-family:var(--mono);font-size:11px;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:5px 12px}
 @media(max-width:640px){.step{grid-template-columns:1fr;gap:6px}}
@@ -163,7 +177,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a:hover{color:var(--red)}
 /* text shadows: crisp offset in the accent color */
 .hero h1,h2{text-shadow:4px 4px 0 color-mix(in srgb,var(--red) 30%,transparent)}
-.logo,.svc h3,.wfc h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
+.logo,.svc h3,.wfc h3,.pcard h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
 .reveal.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}.reveal{opacity:1;transform:none}}
@@ -177,7 +191,7 @@ footer a:hover{color:var(--red)}
     <p class="lbl mono">UGC <b>( AI )</b> Ads Editor</p>
     <h1>Ads that stop the scroll.</h1>
     <p class="sub">2+ years of professional AI experience and 3+ years of photo and video editing. UGC avatar ads and Pixar- and Disney-style 3D animated stories for TikTok, Reels and Shorts, in English and Filipino.</p>
-    <a class="btn" href="#work">See the work</a>
+    <div class="cta"><a class="btn" href="#work">See the work</a><a class="btn ghost" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
   </div>
 </header>
 
@@ -228,14 +242,47 @@ footer a:hover{color:var(--red)}
   </div>
 </section>
 
-<section>
-  <div class="wrap tl">
-    <div class="step reveal"><div class="mono">Professional</div><div><h3>AI ads and video editing</h3><p>Using AI prompts daily at work, across platforms such as Claude, ChatGPT, Google Flow and Higgsfield, to produce UGC avatar ads and 3D animated story ads, then editing them into scroll-stopping short-form videos for English and Filipino audiences.</p><div class="tags"><span>Claude</span><span>ChatGPT</span><span>Google Flow</span><span>Higgsfield</span><span>AI prompting</span><span>UGC avatar ads</span><span>3D animation</span><span>Video editing</span><span>Photo editing</span></div></div></div>
-    <div class="step reveal"><div class="mono">College</div><div><h3>Academic editing and AI practice</h3><p>Built my photo and video editing foundation through academic projects while prompting AI tools every day, which shaped the workflow I use professionally today.</p><div class="tags"><span>Photo editing</span><span>Video editing</span><span>Daily AI prompts</span></div></div></div>
+<section id="resume">
+  <div class="wrap">
+    <p class="mono reveal" style="color:var(--red);margin:0 0 10px">Experience &amp; education</p>
+    <h2 class="reveal">Where I’ve been.</h2>
+    <div class="tl">
+      <div class="step reveal"><div class="mono">Late 2022 – Present</div><div><h3>Freelance AI Ads &amp; Video Editor</h3><ul>
+        <li>Use AI prompts every day, with Claude, ChatGPT, Google Flow and Higgsfield, to generate and refine content for short-form ads.</li>
+        <li>Edit UGC avatar ads that open with a three-second hook, show the product in a clear demo and close with a call to action.</li>
+        <li>Produce Pixar- and Disney-style 3D animated story ads that move from problem to product reveal.</li>
+        <li>Create realistic AI ads, including drama-style shorts and before-and-after testimonials.</li>
+        <li>Adapt each ad to its platform: TikTok, Instagram Reels, Facebook Reels and YouTube Shorts.</li>
+        <li>Write and edit ads in English and Filipino to reach local and international audiences.</li>
+        <li>Handle photo and video editing in CapCut, Premiere Pro and DaVinci Resolve.</li>
+      </ul><div class="tags"><span>Claude</span><span>ChatGPT</span><span>Google Flow</span><span>Higgsfield</span><span>AI prompting</span><span>UGC avatar ads</span><span>3D animation</span><span>Video editing</span><span>Photo editing</span></div></div></div>
+      <div class="step reveal"><div class="mono">2020 – 2022</div><div><h3>Freelance Virtual Assistant</h3><ul>
+        <li>Provided virtual assistant services to remote clients while studying.</li>
+        <li>Shifted my focus to mostly photo and video editing in late 2022.</li>
+      </ul></div></div>
+      <div class="step reveal"><div class="mono">2019 – 2023</div><div><h3>BS in Computer Engineering</h3><p class="school">Bulacan State University, Bulacan</p><ul>
+        <li>Used AI prompts on a daily basis throughout college.</li>
+        <li>Completed academic photo and video editing projects that built the foundation for my professional work.</li>
+      </ul></div></div>
+    </div>
   </div>
 </section>
 
 
+
+<section class="built" id="built">
+  <div class="wrap">
+    <p class="mono reveal" style="color:var(--red);margin:0 0 10px">Behind this site</p>
+    <h2 class="reveal">Built with AI.<br><span style="color:var(--mute)">Backed by research.</span></h2>
+    <p class="lead reveal">This website is a live sample of how I work. The same AI experience I use to make ads went into building it, and every choice, from layout to wording, was researched and refined before it went live.</p>
+    <div class="pgrid">
+      <div class="pcard reveal"><span class="mono">01</span><h3>AI experience</h3><p>Daily AI prompting for ads, applied here to the design, the code and the copy.</p></div>
+      <div class="pcard reveal"><span class="mono">02</span><h3>Research experience</h3><p>I study what makes short-form ads and portfolios work, then build to what I find.</p></div>
+      <div class="pcard reveal"><span class="mono">03</span><h3>Human direction</h3><p>AI does the heavy lifting. I set the style, check every detail and make the final call.</p></div>
+    </div>
+    <p class="one reveal"><b>//</b> The same workflow I bring to your ads</p>
+  </div>
+</section>
 
 <section class="contact" id="contact">
   <div class="wrap">
@@ -244,11 +291,11 @@ footer a:hover{color:var(--red)}
     <p class="sub reveal">Open to remote projects. Tell me about your brand and where the ad will run.</p>
     <a class="mail reveal" id="email" href="mailto:leabresjedhansm@gmail.com">leabresjedhansm@gmail.com</a>
     <a class="mail reveal" href="tel:+639762520737">+63 976 252 0737</a>
-    <div class="acts"><a class="btn dk" href="mailto:leabresjedhansm@gmail.com?subject=Ad%20project">Send a message</a><button class="btn ol" id="copy-email" type="button">Copy email</button></div>
+    <div class="acts"><a class="btn dk" href="mailto:leabresjedhansm@gmail.com?subject=Ad%20project">Send a message</a><button class="btn ol" id="copy-email" type="button">Copy email</button><a class="btn ol" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
   </div>
 </section>
 
-<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino</span><a href="#top">Back to top ↑</a></div></footer>
+<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino</span><span>Built with AI + research</span><a href="#top">Back to top ↑</a></div></footer>
 
 <script>
 /* EDIT YOUR ADS HERE. Add featured: true to a card to pin it first and highlight it.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
