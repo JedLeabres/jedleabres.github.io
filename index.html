@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jed Hans Leabres | UGC &amp; AI Ads Editor</title>
-<meta name="description" content="Jed Hans Leabres, UGC and AI ads editor. UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English and Filipino.">
+<meta name="description" content="Jed Hans Leabres, UGC and AI ads editor. UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English, Filipino and Latin American Spanish.">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jed Hans Leabres | UGC &amp; AI Ads Editor">
-<meta property="og:description" content="UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English and Filipino.">
+<meta property="og:description" content="UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English, Filipino and Latin American Spanish.">
 <meta property="og:url" content="https://jedleabres.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237f9cff'/%3E%3C/svg%3E">
@@ -106,6 +106,15 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .arrows{display:flex;gap:10px;justify-content:flex-end}
 .arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--fg);background:none;color:var(--fg);font-size:18px;cursor:pointer}
 .arrows button:hover{background:var(--fg);color:var(--bg)}
+/* Latin American Spanish section: dark with its own warm coral accent */
+.latam{--red:#ff8a4c;--card:#16120e;--fg:#f4f4f4;--mute:#a9a39a;--line:#2a2a2a;background:#000;background-image:radial-gradient(ellipse 60% 45% at 88% 0%,rgba(255,138,76,.2),transparent 70%),radial-gradient(circle,#2a2a2a 1.4px,transparent 1.6px);background-size:auto,22px 22px;color:#f4f4f4}
+.latam .thumb{--red:#ff8a4c}
+.latam .lead{color:#bdbdbd;max-width:560px;font-size:18px;margin:0}
+.latam .btn:hover{color:#111}
+.latam .arrows button:hover{color:#111}
+.latam .coming{margin:0 24px;border:1px dashed #5a4030;border-radius:20px;padding:44px 24px;text-align:center;color:#bdbdbd}
+.latam .coming h3{font-family:var(--dot);font-weight:800;font-size:clamp(24px,3.5vw,34px);line-height:1;margin:10px 0 8px;color:#f4f4f4}
+.latam .coming p{margin:0}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .svc{background:var(--card);border-radius:24px;padding:36px 32px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between}
 .svc.dk{background:#000;color:#f4f4f4}
@@ -190,13 +199,13 @@ footer a:hover{color:var(--red)}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#latam">Español</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
     <p class="lbl mono">UGC <b>( AI )</b> Ads Editor</p>
     <h1>Ads that stop the scroll.</h1>
-    <p class="sub">2+ years of professional AI experience and 3+ years of photo and video editing. UGC avatar ads and Pixar- and Disney-style 3D animated stories for TikTok, Reels and Shorts, in English and Filipino.</p>
+    <p class="sub">2+ years of professional AI experience and 3+ years of photo and video editing. UGC avatar ads and Pixar- and Disney-style 3D animated stories for TikTok, Reels and Shorts, in English, Filipino and Latin American Spanish.</p>
     <div class="cta"><a class="btn" href="#work">See the work</a><a class="btn ghost" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
   </div>
 </header>
@@ -211,6 +220,16 @@ footer a:hover{color:var(--red)}
   <div class="wrap workcta reveal"><p class="mono">Like what you see?</p><a class="btn dk" href="#contact">Hire me</a></div>
 </section>
 
+<section class="latam" id="latam">
+  <div class="wrap head">
+    <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">Anuncios en español latino</p><h2 style="margin:0 0 16px">Latin American<br><span style="color:var(--mute)">Spanish ads.</span></h2><p class="lead">Short-form ads made for Spanish-speaking audiences across Latin America and the US, for TikTok, Reels and Shorts.</p></div>
+  </div>
+  <div class="wrap"><div class="coming" id="latam-empty" hidden><span class="mono" style="color:var(--red)">Próximamente</span><h3>New Spanish ads landing soon.</h3><p>Want one made for your brand? Get in touch below.</p></div></div>
+  <div class="rail" id="latam-grid"></div>
+  <div class="wrap arrows" id="latam-arrows"><button type="button" id="latam-prev" aria-label="Previous">‹</button><button type="button" id="latam-next" aria-label="Next">›</button></div>
+  <div class="wrap workcta reveal"><p class="mono">¿Listo para tu próximo anuncio?</p><a class="btn" href="#contact">Hire me</a></div>
+</section>
+
 <section id="services">
   <div class="wrap">
     <h2 class="reveal">Built for short-form feeds.</h2>
@@ -218,7 +237,7 @@ footer a:hover{color:var(--red)}
       <div class="svc dk reveal"><div><span class="mono">UGC</span><h3>Avatar ads</h3></div><p>Realistic AI presenters with a three-second hook, a clear demo and a CTA.</p></div>
       <div class="svc reveal"><div><span class="mono">Animation</span><h3>Pixar and Disney style</h3></div><p>3D animated characters and story-led ads people finish watching.</p></div>
       <div class="svc reveal"><div><span class="mono">Formats</span><h3>Every platform</h3></div><p>TikTok, Facebook Reels, Instagram Reels and YouTube Shorts.</p></div>
-      <div class="svc reveal"><div><span class="mono">Languages</span><h3>English and Filipino</h3></div><p>Mostly English ads, with growing work for Filipino audiences.</p></div>
+      <div class="svc reveal"><div><span class="mono">Languages</span><h3>Three languages</h3></div><p>English, Filipino and Latin American Spanish. Mostly English ads, with growing work for Filipino and Spanish-speaking audiences.</p></div>
     </div>
   </div>
 </section>
@@ -260,7 +279,7 @@ footer a:hover{color:var(--red)}
         <li>Produce Pixar- and Disney-style 3D animated story ads that move from problem to product reveal.</li>
         <li>Create realistic AI ads, including drama-style shorts and before-and-after testimonials.</li>
         <li>Adapt each ad to its platform: TikTok, Instagram Reels, Facebook Reels and YouTube Shorts.</li>
-        <li>Write and edit ads in English and Filipino to reach local and international audiences.</li>
+        <li>Write and edit ads in English, Filipino and Latin American Spanish to reach local and international audiences.</li>
         <li>Handle photo and video editing in CapCut, Premiere Pro and DaVinci Resolve.</li>
       </ul><div class="tags"><span>Claude</span><span>ChatGPT</span><span>Google Flow</span><span>Higgsfield</span><span>AI prompting</span><span>UGC avatar ads</span><span>3D animation</span><span>Video editing</span><span>Photo editing</span></div></div></div>
       <div class="step reveal"><div class="mono">2020 – 2022</div><div><h3>Freelance Virtual Assistant</h3><ul>
@@ -300,7 +319,7 @@ footer a:hover{color:var(--red)}
   </div>
 </section>
 
-<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino</span><span>Built with AI + research</span><a href="#top">Back to top ↑</a></div></footer>
+<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino · Español (LatAm)</span><span>Built with AI + research</span><a href="#top">Back to top ↑</a></div></footer>
 
 <script>
 /* EDIT YOUR ADS HERE. Add featured: true to a card to pin it first and highlight it.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
@@ -312,7 +331,22 @@ const ADS = [
   { title: "AI Me Explains: UGC Ads with Google Flow & Veo 3", desc: "An AI video of myself talking straight to camera, walking through how I create UGC ads in Google Flow with Veo 3: from a starting image to smooth video clips, with highlighted captions.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", featured: true, link: "", video: "https://jedleabres.github.io/asianjed.mp4", poster: "" },
   { title: "3D explainer with cutaway", desc: "Animated body or product cutaway that explains the benefit fast.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "", poster: "" },
   { title: "Meet Marcus: Gym Bro Comedy Skit", desc: "Realistic AI comedy short about a loud, muscle-bound gym regular, with deadpan narration and punchy highlighted captions built to hold attention to the last second.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", link: "", video: "https://jedleabres.github.io/gymbro.mp4", poster: "" },
+  { title: "Beach Interview: Three Things (Spanish)", desc: "Realistic AI street-interview ad in Latin American Spanish, with the presenter holding up each product to the mic and highlighted word-by-word captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Facebook Reels", link: "", video: "https://jedleabres.github.io/es-beach-interview.mp4", poster: "https://jedleabres.github.io/posters/es-beach-interview.jpg" },
   { title: "Filipino animated story", desc: "Animated story ad voiced in Filipino for local feeds.", kind: "3D animated", lang: "Filipino", platform: "YouTube Shorts", link: "", video: "", poster: "" }
+];
+/* LATIN AMERICAN SPANISH ADS. Add your 9 videos here, one object each, like the example below (copy it, remove the /* and the closing marker).
+   These 8 are live. If the list is ever empty the section shows a "coming soon" note. Add featured: true to pin one first.
+   { title: "Title here", desc: "One or two sentences about the ad.", kind: "UGC avatar", lang: "Spanish (LatAm)", platform: "TikTok", link: "", video: "https://jedleabres.github.io/your-file.mp4", poster: "" },
+*/
+const LATAM = [
+  { title: "Beach Interview: Three Things", desc: "Realistic AI street-interview ad on a sunny beach, with the presenter holding up each product to the mic and highlighted word-by-word Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-beach-interview.mp4", poster: "https://jedleabres.github.io/posters/es-beach-interview.jpg" },
+  { title: "Boxing Ring Interview: Three Foods", desc: "A realistic AI presenter interviewed ringside at a boxing event, holding up pantry staples as he explains, with highlighted Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-boxing-interview.mp4", poster: "https://jedleabres.github.io/posters/es-boxing-interview.jpg" },
+  { title: "Beach Reaction Hook into Expert Explainer", desc: "Opens on a reaction hook from a woman on the beach, then cuts to a presenter in a bright home office who explains it to camera, with Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-beach-reaction.mp4", poster: "https://jedleabres.github.io/posters/es-beach-reaction.jpg" },
+  { title: "Soursop Bitters: Street Hook and Studio Presenter", desc: "A street-interview style hook leads into a studio presenter and a point-of-view product shot, with highlighted Spanish captions throughout.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-soursop-bitters.mp4", poster: "https://jedleabres.github.io/posters/es-soursop-bitters.jpg" },
+  { title: "Soursop Leaves and a Simmering Pot", desc: "A realistic AI presenter in a sunlit waterfront office shows soursop leaves, a pot on the stove and a product bottle, with word-by-word Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-soursop-leaves.mp4", poster: "https://jedleabres.github.io/posters/es-soursop-leaves.jpg" },
+  { title: "Simple Home Recipe: Studio Talk", desc: "A seated AI presenter in a blue-curtain studio talks through a simple at-home recipe step by step, with highlighted Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-home-recipe.mp4", poster: "https://jedleabres.github.io/posters/es-home-recipe.jpg" },
+  { title: "Balcony Tips: Pantry Staples", desc: "A presenter on a high-rise balcony holds up apple cider vinegar and coconut oil while sharing everyday tips, with Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-balcony-tips.mp4", poster: "https://jedleabres.github.io/posters/es-balcony-tips.jpg" },
+  { title: "Hook Clip: Treadmill Opener", desc: "A six-second vertical hook clip with a bold on-screen opener and a presenter walking on a treadmill, built to stop the scroll.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", link: "", video: "https://jedleabres.github.io/es-hook-soy53.mp4", poster: "https://jedleabres.github.io/posters/es-hook-soy53.jpg" }
 ];
 const rail = document.getElementById('grid'), filtersEl = document.getElementById('filters');
 let current = 'All';
@@ -360,12 +394,13 @@ function vctl(v, thumb) {
   upd(); state(); return bar;
 }
 const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const allVideos = () => [...document.querySelectorAll('.rail video')];
 function hoverPreview(card, v) {
   if (!canHover) return;
   card.addEventListener('pointerenter', e => {
     if (e.pointerType !== 'mouse') return;
     card.classList.add('hovering');
-    const busy = [...rail.querySelectorAll('video')].some(o => o !== v && !o.paused && !o._preview);
+    const busy = allVideos().some(o => o !== v && !o.paused && !o._preview);
     if (v.paused && !busy) {
       v._preview = true; v.muted = true;
       const pr = v.play(); if (pr && pr.catch) pr.catch(() => { v._preview = false; });
@@ -384,7 +419,7 @@ function card(ad) {
     v.playsInline = true; v.preload = 'metadata'; v.src = vid;
     if (safe(ad.poster)) v.poster = ad.poster; m.appendChild(v);
     m.appendChild(el('span', 'play')); m.appendChild(vctl(v, m)); hoverPreview(c, v);
-    if (ad.featured) { c.classList.add('featured'); m.appendChild(el('span', 'badge', 'Meet Jed')); }
+    if (ad.featured) { c.classList.add('featured'); m.appendChild(el('span', 'badge', ad.badge || 'Meet Jed')); }
   } else {
     m = link ? el('a', 'thumb') : el('div', 'thumb');
     if (link) { m.href = link; m.target = '_blank'; m.rel = 'noopener'; m.setAttribute('aria-label', 'Watch ' + ad.title + ' on ' + ad.platform); }
@@ -400,8 +435,9 @@ function apply() {
   rail.querySelectorAll('.ad').forEach(c => { c.hidden = current !== 'All' && !c.dataset.keys.split('|').includes(current); });
   rail.scrollTo({ left: 0, behavior: 'smooth' });
 }
+const live = list => list.filter(a => safe(a.video) || safe(a.link)).sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)); /* ads without a video or link stay hidden until you add one */
 (function build() {
-  const LIVE = ADS.filter(a => safe(a.video) || safe(a.link)).sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)); /* ads without a video or link stay hidden until you add one */
+  const LIVE = live(ADS);
   LIVE.forEach(a => rail.appendChild(card(a)));
   const set = ['All'];
   LIVE.forEach(a => [a.kind, a.lang].forEach(k => { if (k && !set.includes(k)) set.push(k); }));
@@ -410,12 +446,25 @@ function apply() {
     b.onclick = () => { current = n; filtersEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); apply(); };
     filtersEl.appendChild(b);
   });
+})();
+(function buildLatam() {
+  const lr = document.getElementById('latam-grid'), LIVE = live(LATAM);
+  LIVE.forEach(a => { a.badge = a.badge || 'Español'; lr.appendChild(card(a)); });
+  const none = LIVE.length === 0;
+  document.getElementById('latam-empty').hidden = !none;
+  lr.hidden = none; document.getElementById('latam-arrows').hidden = none;
+})();
+(function players() {
   const vio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) e.target.pause(); }), { threshold: .25 });
-  rail.querySelectorAll('video').forEach(v => vio.observe(v));
-  rail.querySelectorAll('video').forEach(v => v.addEventListener('play', () => rail.querySelectorAll('video').forEach(o => { if (o !== v) o.pause(); })));
+  allVideos().forEach(v => {
+    vio.observe(v);
+    v.addEventListener('play', () => allVideos().forEach(o => { if (o !== v) o.pause(); }));
+  });
 })();
 document.getElementById('prev').onclick = () => rail.scrollBy({ left: -330, behavior: 'smooth' });
 document.getElementById('next').onclick = () => rail.scrollBy({ left: 330, behavior: 'smooth' });
+document.getElementById('latam-prev').onclick = () => document.getElementById('latam-grid').scrollBy({ left: -330, behavior: 'smooth' });
+document.getElementById('latam-next').onclick = () => document.getElementById('latam-grid').scrollBy({ left: 330, behavior: 'smooth' });
 (function progress() {
   const bar = document.getElementById('prog'); let tick = false;
   const upd = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(Math.max(scrollY / h, 0), 1) : 0) + ')'; tick = false; };
