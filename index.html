@@ -190,6 +190,43 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 footer{border-top:1px solid var(--line);padding:32px 0;color:var(--mute)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer a:hover{color:var(--red)}
+/* scroll effects */
+.hero{--hp:0;background-position:0 calc(var(--hp)*80px)}
+.hero::after{transform:translate3d(0,calc(var(--hp)*140px),0) scale(calc(1 + var(--hp)*.3));will-change:transform}
+.hero .wrap{transform:translate3d(0,calc(var(--hp)*70px),0);opacity:calc(1 - var(--hp)*1.15)}
+.scrollcue{position:absolute;right:24px;bottom:28px;z-index:1;display:flex;align-items:center;gap:12px;color:#bdbdbd;opacity:calc(1 - var(--hp)*3)}
+.scrollcue i{display:block;width:1px;height:46px;background:linear-gradient(#f4f4f4,transparent);transform-origin:top;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}55%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.statement{padding:120px 0 104px}
+.big{font-family:var(--dot);font-weight:800;font-size:clamp(26px,4.2vw,54px);line-height:1.08;letter-spacing:-.01em;margin:16px 0 0;max-width:1000px}
+.big .w{opacity:.18;transition:opacity .35s}
+.big .w.on{opacity:1}
+.marquee{background:#000;color:#f4f4f4;padding:30px 0;overflow:hidden;--red:#7f9cff}
+.mq{display:flex;white-space:nowrap;will-change:transform;font-family:var(--dot);font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1.35}
+.mq + .mq{color:transparent;-webkit-text-stroke:1px #f4f4f4}
+.mq .t{padding:0 .5em}
+.mq .d{color:var(--red);-webkit-text-stroke:0;padding:0 .1em}
+.stepbar{display:none}
+.dragchip{position:fixed;left:0;top:0;z-index:80;pointer-events:none;background:#7f9cff;color:#0b0b0b;border-radius:99px;padding:6px 14px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;opacity:0;transition:opacity .2s}
+.dragchip.on{opacity:1}
+.dragchip.hide{opacity:0}
+.rail.dragging,.rail.dragging *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
+@media(min-width:1100px) and (min-height:860px){
+  #workflow.pinned{padding:0;height:300vh}
+  #workflow.pinned > .wrap{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:74px;padding-bottom:16px}
+  #workflow.pinned h2{font-size:clamp(30px,3.6vw,46px);margin-bottom:20px}
+  #workflow.pinned .wfc{padding:24px 24px}
+  #workflow.pinned .wfc h3{margin-bottom:12px}
+  #workflow.pinned .wfc li{padding-top:9px;padding-bottom:9px}
+  #workflow.pinned .wfc{opacity:.45;transform:scale(.96);transition:opacity .45s,transform .45s,box-shadow .45s}
+  #workflow.pinned .wfc.active{opacity:1;transform:none;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+  #workflow.pinned .stepbar{display:flex;align-items:center;gap:14px;position:absolute;right:24px;top:76px;color:var(--mute)}
+  #workflow.pinned .stepbar .sn{color:var(--fg)}
+  #workflow.pinned .sbars{display:flex;gap:6px}
+  #workflow.pinned .sbars i{display:block;width:34px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
+  #workflow.pinned .sbars b{display:block;height:100%;background:var(--red);transform:scaleX(0);transform-origin:left}
+}
+@media(prefers-reduced-motion:reduce){.scrollcue i{animation:none}}
 /* text shadows: crisp offset in the accent color */
 .hero h1,h2{text-shadow:4px 4px 0 color-mix(in srgb,var(--red) 30%,transparent)}
 .logo,.svc h3,.wfc h3,.pcard h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
@@ -208,7 +245,17 @@ footer a:hover{color:var(--red)}
     <p class="sub">2+ years of professional AI experience and 3+ years of photo and video editing. UGC avatar ads and Pixar- and Disney-style 3D animated stories for TikTok, Reels and Shorts, in English, Filipino and Latin American Spanish.</p>
     <div class="cta"><a class="btn" href="#work">See the work</a><a class="btn ghost" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
   </div>
+  <div class="scrollcue mono" aria-hidden="true"><span>Scroll</span><i></i></div>
 </header>
+
+<section class="statement" id="statement">
+  <div class="wrap">
+    <p class="mono reveal" style="color:var(--red);margin:0">What I do</p>
+    <p class="big" id="big">I turn product briefs into scroll-stopping ads. UGC avatars, 3D animated stories and realistic AI, made in English, Filipino and Latin American Spanish.</p>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="mq" data-dir="1"></div><div class="mq" data-dir="-1"></div></div>
 
 <section id="work">
   <div class="wrap head">
@@ -398,7 +445,7 @@ const allVideos = () => [...document.querySelectorAll('.rail video')];
 function hoverPreview(card, v) {
   if (!canHover) return;
   card.addEventListener('pointerenter', e => {
-    if (e.pointerType !== 'mouse') return;
+    if (e.pointerType !== 'mouse' || document.body.classList.contains('is-dragging')) return;
     card.classList.add('hovering');
     const busy = allVideos().some(o => o !== v && !o.paused && !o._preview);
     if (v.paused && !busy) {
@@ -465,20 +512,103 @@ document.getElementById('prev').onclick = () => rail.scrollBy({ left: -330, beha
 document.getElementById('next').onclick = () => rail.scrollBy({ left: 330, behavior: 'smooth' });
 document.getElementById('latam-prev').onclick = () => document.getElementById('latam-grid').scrollBy({ left: -330, behavior: 'smooth' });
 document.getElementById('latam-next').onclick = () => document.getElementById('latam-grid').scrollBy({ left: 330, behavior: 'smooth' });
-(function progress() {
-  const bar = document.getElementById('prog'); let tick = false;
-  const upd = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(Math.max(scrollY / h, 0), 1) : 0) + ')'; tick = false; };
-  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
-  addEventListener('resize', upd); upd();
-})();
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function scrollFx() {
+  const bar = document.getElementById('prog'), hero = document.querySelector('.hero'), big = document.getElementById('big');
+  const mqs = [...document.querySelectorAll('.mq')], wfSec = document.getElementById('workflow');
+  const wfCards = [...wfSec.querySelectorAll('.wfc')];
+  const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+  /* 1. statement: words light up as you scroll */
+  let words = [];
+  if (big) {
+    const parts = big.textContent.trim().split(/\s+/); big.textContent = '';
+    parts.forEach((w, i) => { big.appendChild(el('span', 'w' + (still ? ' on' : ''), w)); if (i < parts.length - 1) big.appendChild(document.createTextNode(' ')); });
+    words = [...big.querySelectorAll('.w')];
+  }
+  /* 2. marquee rows that slide with the scroll */
+  const rows = [['UGC avatar ads', '3D animated stories', 'Realistic AI', 'English', 'Filipino', 'Español'], ['Claude', 'ChatGPT', 'Google Flow', 'Veo 3', 'Higgsfield', 'CapCut', 'Premiere Pro', 'DaVinci Resolve']];
+  mqs.forEach((m, i) => { for (let c = 0; c < 4; c++) rows[i].forEach(t => { m.appendChild(el('span', 't', t)); m.appendChild(el('span', 'd', '●')); }); });
+  const measure = () => { mqs.forEach(m => { m._w = m.scrollWidth / 4; }); schedule(); };
+  /* 3. workflow: pinned step-through on large screens */
+  const names = wfCards.map(c => c.querySelector('h3').textContent);
+  const sb = el('div', 'stepbar mono'), sn = el('span', 'sn', '01 / 0' + names.length), st = el('span', 'st', names[0]), bars = el('span', 'sbars');
+  const fills = names.map(() => { const b = el('i'), f = document.createElement('b'); b.appendChild(f); bars.appendChild(b); return f; });
+  sb.append(sn, st, bars); wfSec.querySelector('.wrap').appendChild(sb);
+  const pinQ = matchMedia('(min-width: 1100px) and (min-height: 860px)');
+  const setPinned = () => {
+    const on = pinQ.matches && !still;
+    wfSec.classList.toggle('pinned', on);
+    if (on) wfCards.forEach(c => c.classList.remove('reveal'));
+    schedule();
+  };
+  pinQ.addEventListener('change', setPinned);
+  let tick = false;
+  function schedule() { if (!tick) { tick = true; requestAnimationFrame(frame); } }
+  function frame() {
+    tick = false;
+    const y = scrollY, vh = innerHeight, h = document.documentElement.scrollHeight - vh;
+    bar.style.transform = 'scaleX(' + (h > 0 ? clamp(y / h, 0, 1) : 0) + ')';
+    if (!still) {
+      if (hero) hero.style.setProperty('--hp', clamp(y / (vh * .9), 0, 1).toFixed(3));
+      mqs.forEach(m => { if (!m._w) return; const off = (y * .35) % m._w; m.style.transform = 'translate3d(' + (m.dataset.dir === '1' ? -off : off - m._w) + 'px,0,0)'; });
+      if (big) {
+        const r = big.getBoundingClientRect(), p = clamp((vh * .82 - r.top) / (r.height + vh * .35), 0, 1), n = Math.round(p * words.length);
+        words.forEach((w, i) => w.classList.toggle('on', i < n));
+      }
+    }
+    if (wfSec.classList.contains('pinned')) {
+      const r = wfSec.getBoundingClientRect(), total = wfSec.offsetHeight - vh, p = clamp(-r.top / total, 0, 1), k = wfCards.length, idx = Math.min(k - 1, Math.floor(p * k));
+      wfCards.forEach((c, i) => c.classList.toggle('active', i === idx));
+      fills.forEach((f, i) => { f.style.transform = 'scaleX(' + clamp(p * k - i, 0, 1) + ')'; });
+      sn.textContent = '0' + (idx + 1) + ' / 0' + k; st.textContent = names[idx];
+    }
+  }
+  addEventListener('scroll', schedule, { passive: true });
+  addEventListener('resize', () => { measure(); setPinned(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure(); setPinned(); schedule();
+})();
+/* drag-to-scroll carousels with a "Drag" cursor label */
+(function dragRails() {
+  if (!canHover) return;
+  const chip = el('div', 'dragchip', 'Drag'); document.body.appendChild(chip);
+  document.querySelectorAll('.rail').forEach(r => {
+    let down = false, moved = false, sx = 0, sl = 0;
+    const ignore = t => t.closest('.vc, button, a');
+    r.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') chip.classList.add('on'); });
+    r.addEventListener('pointerleave', () => chip.classList.remove('on'));
+    r.addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      chip.style.transform = 'translate(' + (e.clientX + 18) + 'px,' + (e.clientY + 18) + 'px)';
+      chip.classList.toggle('hide', !!ignore(e.target) || down);
+    });
+    r.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || ignore(e.target)) return;
+      down = true; moved = false; sx = e.clientX; sl = r.scrollLeft;
+    });
+    addEventListener('pointermove', e => {
+      if (!down) return;
+      const dx = e.clientX - sx;
+      if (!moved && Math.abs(dx) > 6) { moved = true; r.style.scrollSnapType = 'none'; r.classList.add('dragging'); document.body.classList.add('is-dragging'); }
+      if (moved) r.scrollLeft = sl - dx;
+    });
+    const end = () => {
+      if (!down) return; down = false;
+      if (moved) { r.style.scrollSnapType = ''; r.classList.remove('dragging'); setTimeout(() => document.body.classList.remove('is-dragging'), 50); }
+    };
+    addEventListener('pointerup', end); addEventListener('pointercancel', end);
+    r.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  });
+})();
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
   e.target.classList.add('on'); io.unobserve(e.target);
+  if (e.target.style.transitionDelay) e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true });
   const n = e.target.querySelector('[data-n]');
   if (n && !still) { const to = +n.dataset.n, t0 = performance.now();
     (function f(t) { const p = Math.min((t - t0) / 1200, 1); n.textContent = Math.max(1, Math.round(to * p)); if (p < 1) requestAnimationFrame(f); })(t0); }
 }), { threshold: .15 });
+document.querySelectorAll('.tools,.two,.wf,.pgrid,.stats,.tl').forEach(g => [...g.children].forEach((c, i) => { if (c.classList.contains('reveal')) c.style.transitionDelay = Math.min(i * 90, 360) + 'ms'; }));
 document.querySelectorAll('.reveal').forEach(n => io.observe(n));
 const cb = document.getElementById('copy-email');
 cb.onclick = () => {
