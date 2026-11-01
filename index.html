@@ -62,7 +62,7 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .filters button{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg);background:none;border:1px solid var(--line);border-radius:99px;padding:9px 16px;cursor:pointer;transition:all .2s}
 .filters button:hover{border-color:var(--fg)}
 .filters button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-20px 0 -16px;padding:24px 24px 40px;padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scroll-padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scrollbar-width:none}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-20px 0 -40px;padding:24px 24px 64px;padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scroll-padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
 .ad{flex:0 0 clamp(250px,28vw,320px);scroll-snap-align:start;background:var(--card);border-radius:20px;overflow:hidden}
 .ad[hidden]{display:none}
@@ -101,6 +101,8 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .info small{font-family:var(--mono);font-size:11px;text-transform:uppercase;color:var(--red);letter-spacing:.05em}
 .info h3{font-size:19px;font-weight:600;margin:6px 0}
 .info p{margin:0;color:var(--mute);font-size:15px}
+.workcta{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:44px;text-align:center}
+.workcta p{margin:0}
 .arrows{display:flex;gap:10px;justify-content:flex-end}
 .arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--fg);background:none;color:var(--fg);font-size:18px;cursor:pointer}
 .arrows button:hover{background:var(--fg);color:var(--bg)}
@@ -206,6 +208,7 @@ footer a:hover{color:var(--red)}
   </div>
   <div class="rail" id="grid"></div>
   <div class="wrap arrows"><button type="button" id="prev" aria-label="Previous">‹</button><button type="button" id="next" aria-label="Next">›</button></div>
+  <div class="wrap workcta reveal"><p class="mono">Like what you see?</p><a class="btn dk" href="#contact">Hire me</a></div>
 </section>
 
 <section id="services">
