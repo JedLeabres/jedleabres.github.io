@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jed Hans Leabres | UGC &amp; AI Ads Editor</title>
+<meta name="description" content="Jed Hans Leabres, UGC and AI ads editor. UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English and Filipino.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jed Hans Leabres | UGC &amp; AI Ads Editor">
+<meta property="og:description" content="UGC avatar ads, 3D animated story ads and realistic AI ads for TikTok, Reels and Shorts, in English and Filipino.">
+<meta property="og:url" content="https://jedleabres.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237f9cff'/%3E%3C/svg%3E">
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f4f4;--fg:#111;--mute:#6b6b6b;--card:#fff;--line:#dcdcdc;--red:#1b2f6b;
@@ -52,7 +61,7 @@ h2{font-family:var(--dot);font-weight:800;font-size:clamp(30px,5vw,56px);line-he
 .filters button{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--fg);background:none;border:1px solid var(--line);border-radius:99px;padding:9px 16px;cursor:pointer;transition:all .2s}
 .filters button:hover{border-color:var(--fg)}
 .filters button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 24px;scrollbar-width:none}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 24px 24px;padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scroll-padding-left:max(24px,calc((100% - 1200px)/2 + 24px));scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
 .ad{flex:0 0 clamp(250px,28vw,320px);scroll-snap-align:start;background:var(--card);border-radius:20px;overflow:hidden}
 .ad[hidden]{display:none}
@@ -156,7 +165,7 @@ footer a:hover{color:var(--red)}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#tools">Tools</a><a href="#work">Work</a><a href="#workflow">Workflow</a><a href="#services">Services</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#tools">Tools</a><a href="#work">Work</a><a href="#workflow">Workflow</a><a href="#services">Services</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -312,14 +321,17 @@ function apply() {
   rail.scrollTo({ left: 0, behavior: 'smooth' });
 }
 (function build() {
-  ADS.forEach(a => rail.appendChild(card(a)));
+  const LIVE = ADS.filter(a => safe(a.video) || safe(a.link)); /* ads without a video or link stay hidden until you add one */
+  LIVE.forEach(a => rail.appendChild(card(a)));
   const set = ['All'];
-  ADS.forEach(a => [a.kind, a.lang].forEach(k => { if (k && !set.includes(k)) set.push(k); }));
+  LIVE.forEach(a => [a.kind, a.lang].forEach(k => { if (k && !set.includes(k)) set.push(k); }));
   set.forEach(n => {
     const b = el('button', '', n); b.type = 'button'; b.setAttribute('aria-pressed', String(n === current));
     b.onclick = () => { current = n; filtersEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); apply(); };
     filtersEl.appendChild(b);
   });
+  const vio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) e.target.pause(); }), { threshold: .25 });
+  rail.querySelectorAll('video').forEach(v => vio.observe(v));
   rail.querySelectorAll('video').forEach(v => v.addEventListener('play', () => rail.querySelectorAll('video').forEach(o => { if (o !== v) o.pause(); })));
 })();
 document.getElementById('prev').onclick = () => rail.scrollBy({ left: -330, behavior: 'smooth' });
