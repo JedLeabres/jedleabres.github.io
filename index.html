@@ -12,6 +12,7 @@
 <meta property="og:url" content="https://jedleabres.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237f9cff'/%3E%3C/svg%3E">
+<script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="dark")d.dataset.theme="dark";if(localStorage.getItem("motion")==="off")d.classList.add("still")}catch(e){}</script>
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 <link href="https://fonts.googleapis.com/css2?family=Doto:wght@400;800&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -227,6 +228,39 @@ footer a:hover{color:var(--red)}
   #workflow.pinned .sbars b{display:block;height:100%;background:var(--red);transform:scaleX(0);transform-origin:left}
 }
 @media(prefers-reduced-motion:reduce){.scrollcue i{animation:none}}
+/* extras: dark mode, intro, HUD, back-to-top */
+:root[data-theme="dark"]{--bg:#0b0b0b;--fg:#f4f4f4;--mute:#9a9a9a;--card:#171717;--line:#2a2a2a;--red:#7f9cff;color-scheme:dark}
+:root[data-theme="dark"] .svc.dk,:root[data-theme="dark"] .wfc.dk,:root[data-theme="dark"] .mytool{border:1px solid var(--line)}
+.themebtn,.mbtn{background:none;border:1px solid var(--line);border-radius:99px;color:var(--fg);padding:6px 12px;font-size:12px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.themebtn:hover,.mbtn:hover:not(:disabled){background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.mbtn{color:var(--mute)}
+.mbtn:disabled{opacity:.6;cursor:default}
+.hw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 8px 10px 0;margin:0 -8px -10px 0}
+.hw > span{display:inline-block;transform:translateY(112%);transition:transform .95s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*110ms + 150ms)}
+.hero h1.go .hw > span{transform:none}
+.hero .lbl,.hero .sub,.hero .cta,.hero .hstats{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.hero .lbl{animation-delay:.05s}.hero .sub{animation-delay:.55s}.hero .cta{animation-delay:.7s}.hero .hstats{animation-delay:.85s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.hstats{display:grid;grid-template-columns:repeat(4,auto);gap:32px;justify-content:start;margin-top:44px;padding-top:22px;border-top:1px solid #2a2a2a}
+.hstats b{display:block;font-family:var(--dot);font-weight:800;font-size:clamp(28px,3.4vw,44px);line-height:1;color:#f4f4f4}
+.hstats span{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#9a9a9a}
+@media(max-width:640px){.hstats{grid-template-columns:repeat(2,auto);gap:22px 32px}}
+.rail:not(.in) .ad{opacity:0}
+.rail.in .ad{animation:cardIn .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*80ms)}
+@keyframes cardIn{from{opacity:0;transform:translateY(40px) scale(.96)}}
+.hud{position:fixed;left:20px;bottom:20px;z-index:45;display:flex;gap:10px;align-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:11px;color:var(--mute);opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;pointer-events:none}
+.hud.on{opacity:1;transform:none}
+.hud .hn{color:var(--red)}.hud .hl{color:var(--fg)}.hud .hpct{min-width:3.6ch;text-align:right}
+@media(max-width:720px){.hud{display:none}}
+.totop{position:fixed;right:20px;bottom:20px;z-index:45;width:48px;height:48px;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .3s}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg{position:absolute;inset:0;width:100%;height:100%}
+.totop .bg{fill:var(--bg)}
+.totop .trk{fill:none;stroke:var(--line);stroke-width:2}
+.totop .rg{fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round}
+.totop span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:16px;color:var(--fg)}
+html.still *,html.still *::before,html.still *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+html.still .reveal{opacity:1;transform:none}
 /* text shadows: crisp offset in the accent color */
 .hero h1,h2{text-shadow:4px 4px 0 color-mix(in srgb,var(--red) 30%,transparent)}
 .logo,.svc h3,.wfc h3,.pcard h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
@@ -236,7 +270,7 @@ footer a:hover{color:var(--red)}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#latam">Español</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#latam">Español</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><button class="themebtn mono" id="theme" type="button" aria-label="Switch between light and dark mode">Dark</button><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -244,6 +278,7 @@ footer a:hover{color:var(--red)}
     <h1>Ads that stop the scroll.</h1>
     <p class="sub">2+ years of professional AI experience and 3+ years of photo and video editing. UGC avatar ads and Pixar- and Disney-style 3D animated stories for TikTok, Reels and Shorts, in English, Filipino and Latin American Spanish.</p>
     <div class="cta"><a class="btn" href="#work">See the work</a><a class="btn ghost" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
+    <div class="hstats" id="hstats"><div><b data-n="2" data-suffix="+">2+</b><span>Years of pro AI</span></div><div><b data-n="3" data-suffix="+">3+</b><span>Years of editing</span></div><div><b data-n="3">3</b><span>Languages</span></div><div><b data-n="14" id="vidcount">14</b><span>Portfolio videos</span></div></div>
   </div>
   <div class="scrollcue mono" aria-hidden="true"><span>Scroll</span><i></i></div>
 </header>
@@ -366,7 +401,7 @@ footer a:hover{color:var(--red)}
   </div>
 </section>
 
-<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino · Español (LatAm)</span><span>Built with AI + research</span><a href="#top">Back to top ↑</a></div></footer>
+<footer class="mono"><div class="wrap"><span>Jed Hans Leabres · Malolos, Bulacan, Philippines</span><span>English · Filipino · Español (LatAm)</span><span>Built with AI + research</span><button class="mbtn mono" id="motion" type="button">Animations: On</button><a href="#top">Back to top ↑</a></div></footer>
 
 <script>
 /* EDIT YOUR ADS HERE. Add featured: true to a card to pin it first and highlight it.  tags: ["Song"] adds extra categories.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
@@ -512,7 +547,8 @@ document.getElementById('prev').onclick = () => rail.scrollBy({ left: -330, beha
 document.getElementById('next').onclick = () => rail.scrollBy({ left: 330, behavior: 'smooth' });
 document.getElementById('latam-prev').onclick = () => document.getElementById('latam-grid').scrollBy({ left: -330, behavior: 'smooth' });
 document.getElementById('latam-next').onclick = () => document.getElementById('latam-grid').scrollBy({ left: 330, behavior: 'smooth' });
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sysStill = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const still = sysStill || document.documentElement.classList.contains('still');
 (function scrollFx() {
   const bar = document.getElementById('prog'), hero = document.querySelector('.hero'), big = document.getElementById('big');
   const mqs = [...document.querySelectorAll('.mq')], wfSec = document.getElementById('workflow');
@@ -599,6 +635,61 @@ const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     addEventListener('pointerup', end); addEventListener('pointercancel', end);
     r.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
   });
+})();
+(function chrome() {
+  const root = document.documentElement, clamp = (v, a, b) => Math.min(Math.max(v, a), b);
+  let manualOff = false; try { manualOff = localStorage.getItem('motion') === 'off'; } catch (e) {}
+  if (still) root.classList.add('still');
+  /* hero intro: headline words slide up, stats count up */
+  const h1 = document.querySelector('.hero h1');
+  if (h1 && !still) {
+    const ws = h1.textContent.trim().split(/\s+/); h1.textContent = '';
+    ws.forEach((w, i) => { const o = el('span', 'hw'), n = el('span', '', w); n.style.setProperty('--i', i); o.appendChild(n); h1.appendChild(o); if (i < ws.length - 1) h1.appendChild(document.createTextNode(' ')); });
+    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('go')));
+  }
+  const total = new Set(live(ADS).concat(live(LATAM)).map(a => safe(a.video) || safe(a.link))).size;
+  const vc = document.getElementById('vidcount'); vc.dataset.n = total; vc.textContent = total;
+  document.querySelectorAll('#hstats b').forEach(b => {
+    const to = +b.dataset.n, suf = b.dataset.suffix || '';
+    if (still) { b.textContent = to + suf; return; }
+    b.textContent = '0' + suf; const t0 = performance.now() + 900;
+    (function f(t) { const p = clamp((t - t0) / 1300, 0, 1); b.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(f); })(performance.now());
+  });
+  /* cards slide in when a carousel scrolls into view */
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.rail').forEach(r => { [...r.children].forEach((c, i) => c.style.setProperty('--i', Math.min(i, 7))); if (still) r.classList.add('in'); else rio.observe(r); });
+  /* HUD: current section + scroll percent, and a back-to-top ring */
+  const secs = [['top', 'Intro'], ['statement', 'What I do'], ['work', 'Work'], ['latam', 'Español'], ['services', 'Services'], ['workflow', 'Workflow'], ['mytool', 'My tool'], ['tools', 'Tools'], ['experience', 'Experience'], ['resume', 'Resume'], ['built', 'This site'], ['contact', 'Contact']].map(x => [document.getElementById(x[0]), x[1]]).filter(x => x[0]);
+  const hud = el('div', 'hud mono'), hn = el('span', 'hn', '01'), hl = el('span', 'hl', ''), hp = el('span', 'hpct', '000%');
+  hud.append(hn, hl, hp); hud.setAttribute('aria-hidden', 'true'); document.body.appendChild(hud);
+  const up = document.createElement('a'); up.className = 'totop'; up.href = '#top'; up.setAttribute('aria-label', 'Back to top');
+  up.innerHTML = '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" class="bg"/><circle cx="24" cy="24" r="21" class="trk"/><circle cx="24" cy="24" r="21" class="rg" transform="rotate(-90 24 24)"/></svg><span>↑</span>';
+  document.body.appendChild(up);
+  const rg = up.querySelector('.rg'), C = 2 * Math.PI * 21; rg.style.strokeDasharray = C;
+  let tk = false;
+  const fr = () => {
+    tk = false;
+    const y = scrollY, vh = innerHeight, h = document.documentElement.scrollHeight - vh, p = h > 0 ? clamp(y / h, 0, 1) : 0;
+    let idx = 0; secs.forEach((s, i) => { if (s[0].getBoundingClientRect().top <= vh * .4) idx = i; });
+    hn.textContent = String(idx + 1).padStart(2, '0'); hl.textContent = secs[idx][1]; hp.textContent = String(Math.round(p * 100)).padStart(3, '0') + '%';
+    hud.classList.toggle('on', y > vh * .5); up.classList.toggle('on', y > vh); rg.style.strokeDashoffset = C * (1 - p);
+  };
+  addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(fr); } }, { passive: true });
+  addEventListener('resize', fr); fr();
+  /* light / dark toggle (remembered) */
+  const tb = document.getElementById('theme');
+  const paint = () => { tb.textContent = root.dataset.theme === 'dark' ? 'Light' : 'Dark'; };
+  tb.onclick = () => {
+    const dark = root.dataset.theme === 'dark';
+    if (dark) delete root.dataset.theme; else root.dataset.theme = 'dark';
+    try { localStorage.setItem('theme', dark ? 'light' : 'dark'); } catch (e) {}
+    paint();
+  };
+  paint();
+  /* animations on / off (remembered) */
+  const mb = document.getElementById('motion');
+  if (sysStill) { mb.textContent = 'Animations: Reduced'; mb.disabled = true; mb.title = 'Your device asks for reduced motion'; }
+  else { mb.textContent = 'Animations: ' + (manualOff ? 'Off' : 'On'); mb.onclick = () => { try { localStorage.setItem('motion', manualOff ? 'on' : 'off'); } catch (e) {} location.reload(); }; }
 })();
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
