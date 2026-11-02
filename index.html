@@ -42,7 +42,7 @@ background-image:radial-gradient(circle,#2a2a2a 1.4px,transparent 1.6px);backgro
 .hero .wrap{position:relative;z-index:1}
 .hero .lbl{color:#bdbdbd;margin:0 0 18px}
 .hero .lbl b{color:var(--red);font-weight:400}
-.hero h1{font-family:var(--dot);font-weight:800;font-size:clamp(44px,9vw,120px);line-height:.95;margin:0;max-width:11ch;letter-spacing:-.01em}
+.hero h1{color:#f4f4f4;font-family:var(--dot);font-weight:800;font-size:clamp(44px,9vw,120px);line-height:.95;margin:0;max-width:11ch;letter-spacing:-.01em}
 .hero p.sub{max-width:560px;color:#bdbdbd;font-size:18px;margin:22px 0 28px}
 .btn{display:inline-block;background:#f4f4f4;color:#111;border-radius:99px;padding:13px 26px;font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.04em;transition:background .2s,color .2s}
 .btn:hover{background:var(--red);color:#fff}
@@ -242,7 +242,7 @@ footer a:hover{color:var(--red)}
 .mbtn:disabled{opacity:.6;cursor:default}
 .hw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 8px 10px 0;margin:0 -8px -10px 0}
 .hw > span{display:inline-block;transform:translateY(112%);transition:transform .95s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*110ms + 150ms)}
-.hero h1.go .hw > span{transform:none}
+.hero h1.shown .hw > span{transform:none}
 .hero .lbl,.hero .sub,.hero .cta,.hero .hstats{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
 .hero .lbl{animation-delay:.05s}.hero .sub{animation-delay:.55s}.hero .cta{animation-delay:.7s}.hero .hstats{animation-delay:.85s}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}}
@@ -769,7 +769,7 @@ const still = sysStill || document.documentElement.classList.contains('still');
   if (h1 && !still) {
     const ws = h1.textContent.trim().split(/\s+/); h1.textContent = '';
     ws.forEach((w, i) => { const o = el('span', 'hw'), n = el('span', '', w); n.style.setProperty('--i', i); o.appendChild(n); h1.appendChild(o); if (i < ws.length - 1) h1.appendChild(document.createTextNode(' ')); });
-    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('go')));
+    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('shown')));
   }
   const total = new Set(live(ADS).concat(live(LATAM)).map(a => safe(a.video) || safe(a.link))).size;
   const vc = document.getElementById('vidcount'); vc.dataset.n = total; vc.textContent = total;
