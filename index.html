@@ -21,7 +21,7 @@
 color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-x:clip}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
@@ -207,25 +207,30 @@ footer a:hover{color:var(--red)}
 .mq + .mq{color:transparent;-webkit-text-stroke:1px #f4f4f4}
 .mq .t{padding:0 .5em}
 .mq .d{color:var(--red);-webkit-text-stroke:0;padding:0 .1em}
-.stepbar{display:none}
+.stepnav{display:none}
 .dragchip{position:fixed;left:0;top:0;z-index:80;pointer-events:none;background:#7f9cff;color:#0b0b0b;border-radius:99px;padding:6px 14px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;opacity:0;transition:opacity .2s}
 .dragchip.on{opacity:1}
 .dragchip.hide{opacity:0}
 .rail.dragging,.rail.dragging *{cursor:grabbing!important;user-select:none;-webkit-user-select:none}
-@media(min-width:1100px) and (min-height:860px){
-  #workflow.pinned{padding:0;height:300vh}
-  #workflow.pinned > .wrap{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:74px;padding-bottom:16px}
-  #workflow.pinned h2{font-size:clamp(30px,3.6vw,46px);margin-bottom:20px}
-  #workflow.pinned .wfc{padding:24px 24px}
+@media(min-width:960px) and (min-height:560px){
+  #workflow.pinned{padding:0;height:320vh}
+  #workflow.pinned > .wrap{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(240px,.75fr) 1.5fr;column-gap:56px;align-content:center;align-items:start;padding-top:72px;padding-bottom:20px}
+  #workflow.pinned > .wrap > .mono{grid-column:1;grid-row:1}
+  #workflow.pinned h2{grid-column:1;grid-row:2;font-size:clamp(30px,3.4vw,46px);margin-bottom:28px}
+  #workflow.pinned .stepnav{display:flex;flex-direction:column;grid-column:1;grid-row:3}
+  #workflow.pinned .wf{grid-column:2;grid-row:1 / span 3;align-self:center;display:grid;grid-template-columns:1fr;gap:0;height:var(--wfh,auto)}
+  #workflow.pinned .wfc{grid-area:1/1;align-self:start;width:calc(100% / var(--fit,1));transform-origin:top left;transform:scale(var(--fit,1)) translateY(var(--ty,26px));opacity:0;visibility:hidden;pointer-events:none;padding:24px;transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s linear .5s}
+  #workflow.pinned .wfc.active{--ty:0px;opacity:1;visibility:visible;pointer-events:auto;transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s}
   #workflow.pinned .wfc h3{margin-bottom:12px}
-  #workflow.pinned .wfc li{padding-top:9px;padding-bottom:9px}
-  #workflow.pinned .wfc{opacity:.45;transform:scale(.96);transition:opacity .45s,transform .45s,box-shadow .45s}
-  #workflow.pinned .wfc.active{opacity:1;transform:none;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
-  #workflow.pinned .stepbar{display:flex;align-items:center;gap:14px;position:absolute;right:24px;top:76px;color:var(--mute)}
-  #workflow.pinned .stepbar .sn{color:var(--fg)}
-  #workflow.pinned .sbars{display:flex;gap:6px}
-  #workflow.pinned .sbars i{display:block;width:34px;height:3px;border-radius:99px;background:var(--line);overflow:hidden}
-  #workflow.pinned .sbars b{display:block;height:100%;background:var(--red);transform:scaleX(0);transform-origin:left}
+  #workflow.pinned .wfc li{padding-top:10px;padding-bottom:10px}
+  .sitem{display:grid;grid-template-columns:44px 1fr;align-items:center;gap:2px 8px;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:14px 0;cursor:pointer;color:var(--mute);opacity:.5;font:inherit;transition:opacity .3s,color .3s}
+  .sitem:hover{opacity:.85}
+  .sitem.on{opacity:1;color:var(--fg)}
+  .sitem .no{font-family:var(--mono);font-size:12px;color:var(--red)}
+  .sitem .nm{font-family:var(--dot);font-weight:800;font-size:clamp(20px,2vw,28px);line-height:1.1}
+  .sitem .lb{grid-column:2;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .sitem .pr{grid-column:1 / -1;height:2px;margin-top:10px;background:var(--line);border-radius:99px;overflow:hidden}
+  .sitem .pr b{display:block;height:100%;background:var(--red);transform:scaleX(0);transform-origin:left}
 }
 @media(prefers-reduced-motion:reduce){.scrollcue i{animation:none}}
 /* extras: dark mode, intro, HUD, back-to-top */
@@ -261,6 +266,46 @@ footer a:hover{color:var(--red)}
 .totop span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:16px;color:var(--fg)}
 html.still *,html.still *::before,html.still *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 html.still .reveal{opacity:1;transform:none}
+/* highlighted titles (workflow) */
+.hl{background-image:linear-gradient(color-mix(in srgb,var(--red) 40%,transparent),color-mix(in srgb,var(--red) 40%,transparent));background-repeat:no-repeat;background-position:0 92%;background-size:0 .52em;padding:0 .14em;margin:0 -.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .8s cubic-bezier(.2,.8,.2,1) .15s}
+#workflow:not(.pinned) .wfc .hl,.wfc.active .hl,.sitem.on .hl{background-size:100% .52em}
+/* interactive service tiles */
+.two{align-items:start;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr))}
+.svc{position:relative;overflow:hidden;--mx:50%;--my:0%;justify-content:flex-start}
+.svc::before{content:"";position:absolute;inset:0;background:radial-gradient(440px circle at var(--mx) var(--my),color-mix(in srgb,var(--red) 24%,transparent),transparent 62%);opacity:0;transition:opacity .3s;pointer-events:none}
+.svc:hover::before,.svc.open::before{opacity:1}
+.svc.reveal{transition:opacity .8s,transform .8s,translate .3s,box-shadow .3s}
+.svc:hover{translate:0 -4px}
+.svc:hover,.svc.open{box-shadow:inset 0 0 0 1px var(--red)}
+.svc > *{position:relative}
+.svc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex:1 1 auto;min-height:150px}
+.svc-btn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-align:left;cursor:pointer;text-shadow:inherit}
+.svc-btn::after{content:"";position:absolute;inset:0;z-index:1}
+.svc-btn:focus-visible{outline:2px solid var(--red);outline-offset:6px;border-radius:6px}
+.plus{flex:0 0 auto;width:40px;height:40px;border:1px solid var(--red);border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:22px;line-height:1;color:var(--red);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .2s,color .2s}
+.svc.open .plus{transform:rotate(45deg);background:var(--red);color:#fff}
+.svc.dk.open .plus{color:#0b0b0b}
+.more{display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;z-index:2;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1),opacity .4s,visibility 0s linear .5s}
+.svc.open .more{grid-template-rows:1fr;opacity:1;visibility:visible;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1),opacity .4s .1s,visibility 0s}
+.more-in{overflow:hidden;min-height:0;display:flex;flex-direction:column;gap:14px;padding-top:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip2{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;background:none;color:inherit;border:1px solid currentColor;border-radius:99px;padding:7px 13px;cursor:pointer;opacity:.65;transition:opacity .2s,background .2s,color .2s,border-color .2s}
+.chip2:hover{opacity:1}
+.chip2.on{opacity:1;background:var(--red);border-color:var(--red);color:#fff}
+.svc.dk .chip2.on,:root[data-theme="dark"] .chip2.on{color:#0b0b0b}
+.svc .sd{font-size:14px;min-height:3.9em;max-width:none}
+.svc.dk .sd{color:#bdbdbd}
+.go{align-self:flex-start;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--fg);border-bottom:1px solid currentColor;padding-bottom:3px;transition:color .2s}
+.svc.dk .go{color:#f4f4f4}
+.go:hover{color:var(--red)}
+.fm{display:flex;gap:16px;align-items:center}
+.phone{flex:0 0 78px;aspect-ratio:9/16;border:2px solid currentColor;border-radius:14px;position:relative;display:grid;place-items:center;opacity:.9}
+.phone .safe{position:absolute;inset:11% 14% 20% 14%;border:1px dashed var(--red);border-radius:6px}
+.phone .pn{position:relative;font-family:var(--mono);font-size:9px;text-transform:uppercase;text-align:center;padding:0 4px;letter-spacing:.03em}
+.capbox{background:#000;color:#f4f4f4;border-radius:14px;padding:16px 18px;min-height:96px;--red:#7f9cff}
+.svc .cap{margin:0;max-width:none;color:#f4f4f4;font-family:var(--dot);font-weight:800;font-size:clamp(18px,1.7vw,22px);line-height:1.2}
+.cap .mk{background:color-mix(in srgb,var(--red) 55%,transparent);color:#fff;padding:0 .14em;border-radius:3px}
+.capsub{display:block;margin-top:10px;font-size:10px;color:#9a9a9a}
 /* text shadows: crisp offset in the accent color */
 .hero h1,h2{text-shadow:4px 4px 0 color-mix(in srgb,var(--red) 30%,transparent)}
 .logo,.svc h3,.wfc h3,.pcard h3,.feat h3,.stat .num,.tool,.cat h3{text-shadow:2px 2px 0 color-mix(in srgb,var(--red) 30%,transparent)}
@@ -315,16 +360,49 @@ html.still .reveal{opacity:1;transform:none}
 <section id="services">
   <div class="wrap">
     <h2 class="reveal">Built for short-form feeds.</h2>
+    <p class="mono reveal" style="color:var(--mute);margin:-18px 0 30px">Tap a tile to explore</p>
     <div class="two">
-      <div class="svc dk reveal"><div><span class="mono">UGC</span><h3>Avatar ads</h3></div><p>Realistic AI presenters with a three-second hook, a clear demo and a CTA.</p></div>
-      <div class="svc reveal"><div><span class="mono">Animation</span><h3>Pixar and Disney style</h3></div><p>3D animated characters and story-led ads people finish watching.</p></div>
-      <div class="svc reveal"><div><span class="mono">Formats</span><h3>Every platform</h3></div><p>TikTok, Facebook Reels, Instagram Reels and YouTube Shorts.</p></div>
-      <div class="svc reveal"><div><span class="mono">Languages</span><h3>Three languages</h3></div><p>English, Filipino and Latin American Spanish. Mostly English ads, with growing work for Filipino and Spanish-speaking audiences.</p></div>
+      <div class="svc dk reveal" data-svc="ugc">
+        <div class="svc-head"><div><span class="mono">UGC</span><h3><button type="button" class="svc-btn" aria-expanded="false" aria-controls="m-ugc">Avatar ads</button></h3></div><span class="plus" aria-hidden="true">+</span></div>
+        <p>Realistic AI presenters with a three-second hook, a clear demo and a CTA.</p>
+        <div class="more" id="m-ugc"><div class="more-in">
+          <div class="chips" role="group" aria-label="Parts of a UGC ad"><button type="button" class="chip2 stg on" data-d="The first three seconds: a bold line or visual that stops the scroll.">Hook</button><button type="button" class="chip2 stg" data-d="Show the product clearly and in use, with captions on screen.">Demo</button><button type="button" class="chip2 stg" data-d="Close with one clear action: shop, save or follow.">CTA</button></div>
+          <p class="sd">The first three seconds: a bold line or visual that stops the scroll.</p>
+          <a class="go" href="#work" data-filter="UGC avatar">See UGC avatar ads →</a>
+        </div></div>
+      </div>
+      <div class="svc reveal" data-svc="anim">
+        <div class="svc-head"><div><span class="mono">Animation</span><h3><button type="button" class="svc-btn" aria-expanded="false" aria-controls="m-anim">Pixar and Disney style</button></h3></div><span class="plus" aria-hidden="true">+</span></div>
+        <p>3D animated characters and story-led ads people finish watching.</p>
+        <div class="more" id="m-anim"><div class="more-in">
+          <div class="chips" role="group" aria-label="Beats of an animated story ad"><button type="button" class="chip2 stg on" data-d="A character with a relatable need opens the story.">Problem</button><button type="button" class="chip2 stg" data-d="The 3D world reacts with sparkle, charm and transformation.">Magic</button><button type="button" class="chip2 stg" data-d="The product arrives as the answer, with close-ups that make it the hero.">Reveal</button></div>
+          <p class="sd">A character with a relatable need opens the story.</p>
+          <a class="go" href="#work" data-filter="3D animated">See 3D animated ads →</a>
+        </div></div>
+      </div>
+      <div class="svc reveal" data-svc="fmt">
+        <div class="svc-head"><div><span class="mono">Formats</span><h3><button type="button" class="svc-btn" aria-expanded="false" aria-controls="m-fmt">Every platform</button></h3></div><span class="plus" aria-hidden="true">+</span></div>
+        <p>TikTok, Facebook Reels, Instagram Reels and YouTube Shorts.</p>
+        <div class="more" id="m-fmt"><div class="more-in">
+          <div class="chips" role="group" aria-label="Platforms"><button type="button" class="chip2 plat on" data-p="TikTok" data-d="9:16 vertical, with captions placed clear of the side buttons.">TikTok</button><button type="button" class="chip2 plat" data-p="Instagram Reels" data-d="9:16 vertical, with text kept clear of the bottom caption area.">Instagram</button><button type="button" class="chip2 plat" data-p="Facebook Reels" data-d="9:16 vertical, a hook in the first seconds and captions on for silent scrolling.">Facebook</button><button type="button" class="chip2 plat" data-p="YouTube Shorts" data-d="9:16 vertical, with tight pacing built for quick loops.">Shorts</button></div>
+          <div class="fm"><div class="phone" aria-hidden="true"><span class="safe"></span><span class="pn">TikTok</span></div><p class="sd">9:16 vertical, with captions placed clear of the side buttons.</p></div>
+          <a class="go" href="#work">See the work →</a>
+        </div></div>
+      </div>
+      <div class="svc reveal" data-svc="lang">
+        <div class="svc-head"><div><span class="mono">Languages</span><h3><button type="button" class="svc-btn" aria-expanded="false" aria-controls="m-lang">Three languages</button></h3></div><span class="plus" aria-hidden="true">+</span></div>
+        <p>English, Filipino and Latin American Spanish. Mostly English ads, with growing work for Filipino and Spanish-speaking audiences.</p>
+        <div class="more" id="m-lang"><div class="more-in">
+          <div class="chips" role="group" aria-label="Language"><button type="button" class="chip2 lng on" data-l="en">English</button><button type="button" class="chip2 lng" data-l="fil">Filipino</button><button type="button" class="chip2 lng" data-l="es">Español</button></div>
+          <div class="capbox"><p class="cap" id="cap"></p><span class="mono capsub" id="capsub"></span></div>
+          <a class="go" id="lang-go" href="#work" data-filter="English">See English ads →</a>
+        </div></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="workflow"><div class="wrap"><p class="mono reveal" style="color:var(--red);margin:0 0 10px">How I work</p><h2 class="reveal">My workflow, per ad type.</h2><div class="wf"><div class="wfc dk reveal"><span class="mono">UGC</span><h3>Avatar ads</h3><ol><li><b>Brief and hook</b><span>Product, audience and a three-second hook.</span><i>Claude / ChatGPT</i></li><li><b>Script</b><span>Written in English or Filipino with a clear CTA.</span><i>Claude / ChatGPT</i></li><li><b>Avatar and voice</b><span>Presenter, lip-sync and voiceover.</span><i>Higgsfield</i></li><li><b>B-roll and product shots</b><span>Demo clips that back up the claim.</span><i>Google Flow</i></li><li><b>Edit</b><span>Cuts, captions, sound and CTA.</span><i>CapCut</i></li></ol></div><div class="wfc  reveal"><span class="mono">Animation</span><h3>Pixar and Disney style</h3><ol><li><b>Story and character brief</b><span>Problem to product reveal, in a few beats.</span><i>Claude</i></li><li><b>Character and scene prompts</b><span>Consistent 3D look across every shot.</span><i>ChatGPT</i></li><li><b>Animate the shots</b><span>Generate and select the best takes.</span><i>Google Flow / Higgsfield</i></li><li><b>Voice, sound and music</b><span>Voiced in English or Filipino.</span><i>Editing suite</i></li><li><b>Final edit and color</b><span>Pacing, polish and export.</span><i>Premiere / DaVinci</i></li></ol></div><div class="wfc  reveal"><span class="mono">Realistic AI</span><h3>Drama and testimonial</h3><ol><li><b>Concept and hook</b><span>Story angle that earns the first second.</span><i>Claude</i></li><li><b>Character and shot prompts</b><span>Real-person look, locked outfit and setting.</span><i>ChatGPT</i></li><li><b>Generate and pick takes</b><span>Keep only the most believable shots.</span><i>Google Flow</i></li><li><b>Cleanup and pacing edit</b><span>Trim, grade and match audio.</span><i>CapCut / Premiere</i></li><li><b>Export per platform</b><span>TikTok, Reels and Shorts specs.</span><i>Final delivery</i></li></ol></div></div></div></section>
+<section id="workflow"><div class="wrap"><p class="mono reveal" style="color:var(--red);margin:0 0 10px">How I work</p><h2 class="reveal">My workflow, per ad type.</h2><div class="wf"><div class="wfc dk reveal"><span class="mono">UGC</span><h3><span class="hl">Avatar ads</span></h3><ol><li><b>Brief and hook</b><span>Product, audience and a three-second hook.</span><i>Claude / ChatGPT</i></li><li><b>Script</b><span>Written in English or Filipino with a clear CTA.</span><i>Claude / ChatGPT</i></li><li><b>Avatar and voice</b><span>Presenter, lip-sync and voiceover.</span><i>Higgsfield</i></li><li><b>B-roll and product shots</b><span>Demo clips that back up the claim.</span><i>Google Flow</i></li><li><b>Edit</b><span>Cuts, captions, sound and CTA.</span><i>CapCut</i></li></ol></div><div class="wfc  reveal"><span class="mono">Animation</span><h3><span class="hl">Pixar and Disney style</span></h3><ol><li><b>Story and character brief</b><span>Problem to product reveal, in a few beats.</span><i>Claude</i></li><li><b>Character and scene prompts</b><span>Consistent 3D look across every shot.</span><i>ChatGPT</i></li><li><b>Animate the shots</b><span>Generate and select the best takes.</span><i>Google Flow / Higgsfield</i></li><li><b>Voice, sound and music</b><span>Voiced in English or Filipino.</span><i>Editing suite</i></li><li><b>Final edit and color</b><span>Pacing, polish and export.</span><i>Premiere / DaVinci</i></li></ol></div><div class="wfc  reveal"><span class="mono">Realistic AI</span><h3><span class="hl">Drama and testimonial</span></h3><ol><li><b>Concept and hook</b><span>Story angle that earns the first second.</span><i>Claude</i></li><li><b>Character and shot prompts</b><span>Real-person look, locked outfit and setting.</span><i>ChatGPT</i></li><li><b>Generate and pick takes</b><span>Keep only the most believable shots.</span><i>Google Flow</i></li><li><b>Cleanup and pacing edit</b><span>Trim, grade and match audio.</span><i>CapCut / Premiere</i></li><li><b>Export per platform</b><span>TikTok, Reels and Shorts specs.</span><i>Final delivery</i></li></ol></div></div></div></section>
 
 <section id="mytool"><div class="wrap"><div class="mytool reveal"><span class="mono">Built by me</span><h2>My own tool for faster ads.</h2><p class="lead">I created a custom tool to streamline my workflow, so a whole ad can be set up from a single prompt instead of one scene at a time.</p><div class="feat"><div><h3>Multiple scenes</h3><p>Plan and generate every scene of an ad together.</p></div><div><h3>Multiple avatars</h3><p>Bring several presenters or characters into the same ad.</p></div><div><h3>Multiple backgrounds</h3><p>Switch settings across scenes without starting over.</p></div></div><p class="one"><b>//</b> All in 1 prompt</p></div></div></section>
 
@@ -566,16 +644,29 @@ const still = sysStill || document.documentElement.classList.contains('still');
   mqs.forEach((m, i) => { for (let c = 0; c < 4; c++) rows[i].forEach(t => { m.appendChild(el('span', 't', t)); m.appendChild(el('span', 'd', '●')); }); });
   const measure = () => { mqs.forEach(m => { m._w = m.scrollWidth / 4; }); schedule(); };
   /* 3. workflow: pinned step-through on large screens */
-  const names = wfCards.map(c => c.querySelector('h3').textContent);
-  const sb = el('div', 'stepbar mono'), sn = el('span', 'sn', '01 / 0' + names.length), st = el('span', 'st', names[0]), bars = el('span', 'sbars');
-  const fills = names.map(() => { const b = el('i'), f = document.createElement('b'); b.appendChild(f); bars.appendChild(b); return f; });
-  sb.append(sn, st, bars); wfSec.querySelector('.wrap').appendChild(sb);
-  const pinQ = matchMedia('(min-width: 1100px) and (min-height: 860px)');
+  const names = wfCards.map(c => c.querySelector('h3').textContent), K = wfCards.length;
+  const nav = el('div', 'stepnav');
+  const items = wfCards.map((c, i) => {
+    const b = el('button', 'sitem'); b.type = 'button'; b.setAttribute('aria-label', 'Show ' + names[i]);
+    const bar = document.createElement('b'), pr = el('span', 'pr'); pr.appendChild(bar);
+    const nm = el('span', 'nm'); nm.appendChild(el('span', 'hl', names[i]));
+    b.append(el('span', 'no', '0' + (i + 1)), nm, el('span', 'lb', c.querySelector('.mono').textContent), pr);
+    b.onclick = () => { const r = wfSec.getBoundingClientRect(), total = wfSec.offsetHeight - innerHeight; scrollTo({ top: scrollY + r.top + ((i + .5) / K) * total, behavior: 'smooth' }); };
+    nav.appendChild(b); return { b, bar };
+  });
+  wfSec.querySelector('.wrap').appendChild(nav);
+  const pinQ = matchMedia('(min-width: 960px) and (min-height: 560px)'), wf = wfSec.querySelector('.wf');
+  const fit = () => {
+    if (!wfSec.classList.contains('pinned')) { wf.style.removeProperty('--fit'); wf.style.removeProperty('--wfh'); return; }
+    wf.style.setProperty('--fit', '1');
+    const tallest = Math.max.apply(null, wfCards.map(c => c.offsetHeight)), k = Math.min(1, Math.max(.6, (innerHeight - 100) / tallest));
+    wf.style.setProperty('--fit', k.toFixed(3)); wf.style.setProperty('--wfh', Math.round(tallest * k) + 'px');
+  };
   const setPinned = () => {
     const on = pinQ.matches && !still;
     wfSec.classList.toggle('pinned', on);
-    if (on) wfCards.forEach(c => c.classList.remove('reveal'));
-    schedule();
+    if (on) wfCards.forEach(c => { c.classList.remove('reveal'); c.style.transitionDelay = ''; });
+    fit(); schedule();
   };
   pinQ.addEventListener('change', setPinned);
   let tick = false;
@@ -593,18 +684,51 @@ const still = sysStill || document.documentElement.classList.contains('still');
       }
     }
     if (wfSec.classList.contains('pinned')) {
-      const r = wfSec.getBoundingClientRect(), total = wfSec.offsetHeight - vh, p = clamp(-r.top / total, 0, 1), k = wfCards.length, idx = Math.min(k - 1, Math.floor(p * k));
+      const r = wfSec.getBoundingClientRect(), total = wfSec.offsetHeight - vh, p = clamp(-r.top / total, 0, 1), idx = Math.min(K - 1, Math.floor(p * K));
       wfCards.forEach((c, i) => c.classList.toggle('active', i === idx));
-      fills.forEach((f, i) => { f.style.transform = 'scaleX(' + clamp(p * k - i, 0, 1) + ')'; });
-      sn.textContent = '0' + (idx + 1) + ' / 0' + k; st.textContent = names[idx];
+      items.forEach((it, i) => { it.b.classList.toggle('on', i === idx); it.bar.style.transform = 'scaleX(' + clamp(p * K - i, 0, 1) + ')'; });
     }
   }
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', () => { measure(); setPinned(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); fit(); });
   measure(); setPinned(); schedule();
 })();
 /* drag-to-scroll carousels with a "Drag" cursor label */
+(function services() {
+  const cards = [...document.querySelectorAll('.svc')];
+  const setOpen = (c, on) => { c.classList.toggle('open', on); c.querySelector('.svc-btn').setAttribute('aria-expanded', String(on)); };
+  cards.forEach(c => {
+    const btn = c.querySelector('.svc-btn');
+    btn.addEventListener('click', () => { const on = !c.classList.contains('open'); cards.forEach(o => setOpen(o, false)); setOpen(c, on); });
+    c.addEventListener('keydown', e => { if (e.key === 'Escape' && c.classList.contains('open')) { setOpen(c, false); btn.focus(); } });
+    if (canHover && !still) c.addEventListener('pointermove', e => { if (e.pointerType !== 'mouse') return; const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+    /* ad structure / story beats */
+    c.querySelectorAll('.stg').forEach(b => b.addEventListener('click', () => { c.querySelectorAll('.stg').forEach(x => x.classList.toggle('on', x === b)); c.querySelector('.sd').textContent = b.dataset.d; }));
+    /* platform picker */
+    c.querySelectorAll('.plat').forEach(b => b.addEventListener('click', () => { c.querySelectorAll('.plat').forEach(x => x.classList.toggle('on', x === b)); c.querySelector('.sd').textContent = b.dataset.d; c.querySelector('.pn').textContent = b.dataset.p; }));
+  });
+  /* language picker with a sample hook line */
+  const cap = document.getElementById('cap'), sub = document.getElementById('capsub'), lgo = document.getElementById('lang-go');
+  const LANG = {
+    en: { w: 'Stop', rest: ' scrolling. This changes everything.', sub: 'Sample hook · English', href: '#work', f: 'English', t: 'See English ads →' },
+    fil: { w: 'Huwag', rest: ' munang mag-scroll. Ito ang magpapabago ng lahat.', sub: 'Sample hook · Filipino', href: '#contact', f: '', t: 'Ask for Filipino ads →' },
+    es: { w: 'Deja', rest: ' de hacer scroll. Esto lo cambia todo.', sub: 'Sample hook · Español (LatAm)', href: '#latam', f: '', t: 'See Spanish ads →' }
+  };
+  const showLang = k => {
+    const L = LANG[k]; cap.textContent = ''; const mk = el('mark', 'mk', L.w); cap.append(mk, document.createTextNode(L.rest));
+    sub.textContent = L.sub; lgo.textContent = L.t; lgo.setAttribute('href', L.href); if (L.f) lgo.dataset.filter = L.f; else delete lgo.dataset.filter;
+    document.querySelectorAll('.lng').forEach(b => b.classList.toggle('on', b.dataset.l === k));
+  };
+  document.querySelectorAll('.lng').forEach(b => b.addEventListener('click', () => showLang(b.dataset.l)));
+  showLang('en');
+  /* "See ... ads" links apply the matching filter, then scroll to the work */
+  document.querySelectorAll('.go[href="#work"]').forEach(a => a.addEventListener('click', () => {
+    const f = a.dataset.filter; if (!f) return;
+    const btn = [...document.querySelectorAll('#filters button')].find(b => b.textContent.toLowerCase() === f.toLowerCase());
+    if (btn) btn.click();
+  }));
+})();
 (function dragRails() {
   if (!canHover) return;
   const chip = el('div', 'dragchip', 'Drag'); document.body.appendChild(chip);
