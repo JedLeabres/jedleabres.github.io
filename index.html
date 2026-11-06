@@ -207,6 +207,17 @@ footer a:hover{color:var(--red)}
 .src{position:absolute;top:14px;right:14px;z-index:2;border-radius:99px;padding:4px 10px;font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .src.client{background:var(--red);color:#0b0b0b}
 .src.spec{background:rgba(0,0,0,.6);color:#f4f4f4;font-weight:400}
+.morework .lead{color:var(--mute);max-width:640px;font-size:18px;margin:0 0 36px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.mcard{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;transition:border-color .2s,transform .3s}
+.mcard:hover{border-color:var(--red);transform:translateY(-4px)}
+.mcard .mono{color:var(--red);font-size:12px}
+.mcard h3{font-family:var(--dot);font-weight:800;font-size:clamp(24px,2.8vw,32px);line-height:1.05;margin:0;overflow-wrap:anywhere}
+.mcard h3.handle{font-size:clamp(20px,2.1vw,26px)}
+.mcard p{margin:0;color:var(--mute);font-size:15px;flex:1}
+.mcard .go2{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-top:8px}
+.mcard.drive{background:#000;color:#f4f4f4;--red:#7f9cff;border-color:#2a2a2a}
+.mcard.drive p{color:#bdbdbd}
 /* scroll effects */
 .hero{--hp:0;background-position:0 calc(var(--hp)*80px)}
 .hero::after{transform:translate3d(0,calc(var(--hp)*140px),0) scale(calc(1 + var(--hp)*.3));will-change:transform}
@@ -331,7 +342,7 @@ html.still .reveal{opacity:1;transform:none}
 </style>
 </head>
 <body>
-<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#case">Case study</a><a href="#latam">Español</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><button class="themebtn mono" id="theme" type="button" aria-label="Switch between light and dark mode">Dark</button><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
+<nav><div class="in"><a class="logo" href="#top">Jed<i>.</i></a><div class="links mono"><a href="#work">Work</a><a href="#case">Case study</a><a href="#more">More</a><a href="#latam">Español</a><a href="#services">Services</a><a href="#workflow">Workflow</a><a href="#tools">Tools</a><a href="#experience">Experience</a><button class="themebtn mono" id="theme" type="button" aria-label="Switch between light and dark mode">Dark</button><a class="pill" href="#contact">Hire me</a></div><div class="prog" aria-hidden="true"><i id="prog"></i></div></div></nav>
 
 <header class="hero" id="top">
   <div class="wrap">
@@ -351,7 +362,7 @@ html.still .reveal{opacity:1;transform:none}
   </div>
   <div class="rail" id="grid"></div>
   <div class="wrap arrows"><button type="button" id="prev" aria-label="Previous">‹</button><button type="button" id="next" aria-label="Next">›</button></div>
-  <div class="wrap workcta reveal"><p class="mono">Like what you see?</p><a class="btn dk" href="#contact">Hire me</a></div>
+  <div class="wrap workcta reveal"><p class="mono">Like what you see?</p><a class="btn dk" href="#contact">Hire me</a><a class="btn ol" href="https://drive.google.com/drive/folders/1Xr2KmDZHwbmkB8_B09woullWILd5pufi?usp=drive_link" target="_blank" rel="noopener">More on Google Drive</a></div>
 </section>
 
 <section class="case" id="case">
@@ -368,6 +379,33 @@ html.still .reveal{opacity:1;transform:none}
   </div>
   <div class="rail" id="case-grid"></div>
   <div class="wrap"><p class="cnote reveal">The full 90-second ad was a private brand test, so it isn't posted here. Happy to walk you through it on a call.</p></div>
+</section>
+
+<section class="morework" id="more">
+  <div class="wrap">
+    <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">More work</p><h2 style="margin:0 0 16px">UGC, VSLs<br><span style="color:var(--mute)">and AI creators.</span></h2>
+    <p class="lead">More UGC ads and VSLs live in my Google Drive, together with the videos behind the AI creator accounts I've worked on.</p></div>
+    <div class="mgrid">
+      <a class="mcard drive reveal" href="https://drive.google.com/drive/folders/1Xr2KmDZHwbmkB8_B09woullWILd5pufi?usp=drive_link" target="_blank" rel="noopener">
+        <span class="mono">Google Drive</span>
+        <h3>Extra UGC ads &amp; VSLs</h3>
+        <p>The full archive: more UGC avatar ads, VSLs and the videos for both creator accounts.</p>
+        <span class="go2">Open the folder →</span>
+      </a>
+      <a class="mcard reveal" href="https://www.instagram.com/marcustavare/" target="_blank" rel="noopener">
+        <span class="mono">Instagram · AI creator</span>
+        <h3 class="handle">@marcustavare</h3>
+        <p>Realistic AI UGC creator account I worked on.</p>
+        <span class="go2">View on Instagram →</span>
+      </a>
+      <a class="mcard reveal" href="https://www.instagram.com/camillerochestar/" target="_blank" rel="noopener">
+        <span class="mono">Instagram · AI creator</span>
+        <h3 class="handle">@camillerochestar</h3>
+        <p>Realistic AI UGC creator account I worked on.</p>
+        <span class="go2">View on Instagram →</span>
+      </a>
+    </div>
+  </div>
 </section>
 
 <section class="statement" id="statement">
@@ -509,7 +547,7 @@ html.still .reveal{opacity:1;transform:none}
     <p class="sub reveal">Open to remote projects. Tell me about your brand and where the ad will run.</p>
     <a class="mail reveal" id="email" href="mailto:leabresjedhansm@gmail.com">leabresjedhansm@gmail.com</a>
     <a class="mail reveal" href="tel:+639762520737">+63 976 252 0737</a>
-    <div class="acts"><a class="btn dk" href="mailto:leabresjedhansm@gmail.com?subject=Ad%20project">Send a message</a><button class="btn ol" id="copy-email" type="button">Copy email</button><a class="btn ol" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a></div>
+    <div class="acts"><a class="btn dk" href="mailto:leabresjedhansm@gmail.com?subject=Ad%20project">Send a message</a><button class="btn ol" id="copy-email" type="button">Copy email</button><a class="btn ol" href="Jed_Hans_Leabres_Resume.pdf" target="_blank" rel="noopener">Download resume</a><a class="btn ol" href="https://drive.google.com/drive/folders/1Xr2KmDZHwbmkB8_B09woullWILd5pufi?usp=drive_link" target="_blank" rel="noopener">Google Drive portfolio</a></div>
   </div>
 </section>
 
