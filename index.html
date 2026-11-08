@@ -377,6 +377,22 @@ html.still .reveal{opacity:1;transform:none}
   <div class="wrap"><p class="cnote reveal">The full 90-second ad was a private brand test, so it isn't posted here. Happy to walk you through it on a call.</p></div>
 </section>
 
+<section class="case" id="case-jet">
+  <div class="wrap">
+    <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">Case study · Cinematic AI drama</p><h2 style="margin:0 0 16px">A true-story drama intro<br><span style="color:var(--mute)">in one evening.</span></h2>
+    <p class="lead">A hiring-test brief: make the 30-second intro to Part One of a real man's life story, so it feels like a real drama series and he is recognizable from his own photos. Built with free tools: ChatGPT for the references, Google Flow for the scenes and clips, CapCut for the edit.</p></div>
+    <div class="cgrid">
+      <div class="cstep reveal"><span class="mono">01 · Story</span><h3>His words, his arc</h3><p>Read the 15-chapter story and opened Part One the way the book does: his own lines, from the trenches to the lessons, in 30 seconds.</p></div>
+      <div class="cstep reveal"><span class="mono">02 · References</span><h3>Built from real photos</h3><p>A character sheet from his website and Instagram photos, his younger selves built from that sheet, and nine empty locations so every place stays the same.</p></div>
+      <div class="cstep reveal"><span class="mono">03 · Generate</span><h3>Scenes inside fixed sets</h3><p>Each scene placed inside its location, close shots cropped from the wide. When the arrest beats were blocked, rebuilt them as no-face shots that passed.</p></div>
+      <div class="cstep reveal"><span class="mono">04 · Edit</span><h3>Cut on every word</h3><p>Voice-over timed so the montage cuts land on each word, two hooks to test, sound design and music in CapCut. References, stills and clips in under 3.5 hours.</p></div>
+    </div>
+    <p class="mono reveal" style="color:var(--red);margin:48px 0 0">Two hooks, same story</p>
+  </div>
+  <div class="rail" id="jet-grid"></div>
+  <div class="wrap"><p class="cnote reveal">Every step was written up in a production bible: references, every prompt, the shot list, the edit timing and what broke along the way. Happy to walk you through it on a call.</p></div>
+</section>
+
 <section class="morework" id="more">
   <div class="wrap">
     <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">More work</p><h2 style="margin:0 0 16px">UGC, VSLs<br><span style="color:var(--mute)">and AI creators.</span></h2>
@@ -563,6 +579,7 @@ html.still .reveal{opacity:1;transform:none}
 <script>
 /* EDIT YOUR ADS HERE. client: true shows a "Client" chip (paid work); anything else shows "Spec". Add featured: true to a card to pin it first and highlight it.  tags: ["Song"] adds extra categories.  link = TikTok/IG/YouTube/Facebook URL; video = optional direct .mp4; leave both "" for "Link coming soon". */
 const ADS = [
+  { title: "From the Interstate to Real Estate: True-Story Drama Intro", desc: "A 30-second cinematic intro to a real man's life story, made as a hiring test. It cold-opens on cash in a car trunk under police lights, then he tells his story in his own words, from a Milwaukee block to a house he owns.", kind: "Realistic AI", tags: ["Drama"], lang: "English", platform: "Instagram Reels", featured: true, badge: "New · AI drama", link: "", video: "https://jedleabres.github.io/assets/jet/jet-intro-hook2.mp4", poster: "https://jedleabres.github.io/assets/jet/jet-intro-hook2.jpg" },
   { title: "1 Piece, 3 Ways: Cream Jeans Styling Ad", desc: "UGC-style fashion ad that styles one pair of cream jeans for work, date night and the weekend, with word-by-word captions and a save-and-shop call to action.", kind: "UGC avatar", lang: "English", platform: "TikTok", link: "", video: "https://jedleabres.github.io/cream_jeans_3_ways_ad_karaoke.mp4", poster: "" },
   { title: "Cherry Cardigan: 3D Animated Fashion Story", desc: "A 3D animated storybook ad about a tiny seamstress who discovers a cream cherry-embroidered cardigan in a glowing world of yarn, with sparkle reveals and close-ups that make the knit the hero.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "https://jedleabres.github.io/ugcad.mp4", poster: "" },
   { title: "A Day in Her Life: Cinematic AI Drama", desc: "A 58-second emotional short that follows a grandmother from morning light to evening, told in warm autumn scenes with highlighted word-by-word captions.", kind: "Realistic AI", lang: "English", platform: "YouTube Shorts", link: "", video: "https://jedleabres.github.io/grandmadrama.mp4", poster: "" },
@@ -584,6 +601,11 @@ const LATAM = [
   { title: "Simple Home Recipe: Studio Talk", desc: "A seated AI presenter in a blue-curtain studio talks through a simple at-home recipe step by step, with highlighted Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", client: true, link: "https://www.facebook.com/share/v/1E156kFs1E/", video: "https://jedleabres.github.io/assets/Latam vid/es-home-recipe.mp4", poster: "https://jedleabres.github.io/assets/posters/es-home-recipe.jpg" },
   { title: "Balcony Tips: Pantry Staples", desc: "A presenter on a high-rise balcony holds up apple cider vinegar and coconut oil while sharing everyday tips, with Spanish captions.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", client: true, link: "", video: "https://jedleabres.github.io/assets/Latam vid/es-balcony-tips.mp4", poster: "https://jedleabres.github.io/assets/posters/es-balcony-tips.jpg" },
   { title: "Hook Clip: Treadmill Opener", desc: "A six-second vertical hook clip with a bold on-screen opener and a presenter walking on a treadmill, built to stop the scroll.", kind: "Realistic AI", lang: "Spanish (LatAm)", platform: "Short-form", client: true, link: "", video: "https://jedleabres.github.io/assets/Latam vid/es-hook-soy53.mp4", poster: "https://jedleabres.github.io/assets/posters/es-hook-soy53.jpg" }
+];
+/* JET CASE STUDY HOOKS (upload the files to assets/jet/) */
+const JETCASE = [
+  { title: "Hook 1: The Cash in the Trunk", desc: "Cold open on a flashlight sweeping cash and empty suitcases under police lights, then a hard cut to him saying his name. The first frame asks the question his story answers.", kind: "Realistic AI", tags: ["Hook"], lang: "English", platform: "Instagram Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/jet/jet-intro-hook2.mp4", poster: "https://jedleabres.github.io/assets/jet/jet-intro-hook2-trunk.jpg" },
+  { title: "Hook 2: My Name Is Jet", desc: "Opens straight on him in a car at night, turning to the lens to introduce himself, with the highway lights sliding across his face.", kind: "Realistic AI", tags: ["Hook"], lang: "English", platform: "Instagram Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/jet/jet-intro-hook1.mp4", poster: "https://jedleabres.github.io/assets/jet/jet-intro-hook1.jpg" }
 ];
 /* CASE STUDY HOOKS (upload the files to assets/case-study/) */
 const CASE = [
@@ -694,6 +716,8 @@ const live = list => list.filter(a => safe(a.video) || safe(a.link)).sort((a, b)
 (function buildCase() {
   const cr = document.getElementById('case-grid');
   live(CASE).forEach(a => cr.appendChild(card(a)));
+  const jr = document.getElementById('jet-grid');
+  if (jr) live(JETCASE).forEach(a => jr.appendChild(card(a)));
 })();
 (function buildLatam() {
   const lr = document.getElementById('latam-grid'), LIVE = live(LATAM);
@@ -859,7 +883,7 @@ const still = sysStill || document.documentElement.classList.contains('still');
     ws.forEach((w, i) => { const o = el('span', 'hw'), n = el('span', '', w); n.style.setProperty('--i', i); o.appendChild(n); h1.appendChild(o); if (i < ws.length - 1) h1.appendChild(document.createTextNode(' ')); });
     requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('shown')));
   }
-  const total = new Set(live(ADS).concat(live(LATAM), live(CASE)).map(a => safe(a.video) || safe(a.link))).size;
+  const total = new Set(live(ADS).concat(live(LATAM), live(CASE), live(JETCASE)).map(a => safe(a.video) || safe(a.link))).size;
   const vc = document.getElementById('vidcount'); vc.dataset.n = total; vc.textContent = total;
   document.querySelectorAll('#hstats b').forEach(b => {
     const to = +b.dataset.n, suf = b.dataset.suffix || '';
