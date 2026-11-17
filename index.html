@@ -225,6 +225,14 @@ footer a:hover{color:var(--red)}
 .big{font-family:var(--dot);font-weight:800;font-size:clamp(26px,4.2vw,54px);line-height:1.08;letter-spacing:-.01em;margin:16px 0 0;max-width:1000px}
 .big .w{opacity:.18;transition:opacity .35s}
 .big .w.on{opacity:1}
+.stmt{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:56px;align-items:center}
+.meet{position:relative;margin:0}
+.meet video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:#000;border-radius:18px;border:1px solid var(--red);box-shadow:0 0 0 5px color-mix(in srgb,var(--red) 16%,transparent),0 24px 60px -24px var(--red)}
+.meet-tag{position:absolute;top:12px;left:12px;z-index:1;background:var(--red);color:#fff;font-size:11px;padding:4px 10px;border-radius:999px}
+.meet figcaption{margin-top:12px;font-size:14px;line-height:1.45}
+.meet figcaption b{display:block;margin-bottom:4px}
+.meet figcaption span{color:var(--mute)}
+@media(max-width:760px){.stmt{grid-template-columns:1fr;gap:32px}.meet{max-width:300px}}
 .marquee{background:#000;color:#f4f4f4;padding:30px 0;overflow:hidden;--red:#7f9cff}
 .mq{display:flex;white-space:nowrap;will-change:transform;font-family:var(--dot);font-weight:800;font-size:clamp(28px,5vw,56px);line-height:1.35}
 .mq + .mq{color:transparent;-webkit-text-stroke:1px #f4f4f4}
@@ -432,8 +440,17 @@ html.still .reveal{opacity:1;transform:none}
 
 <section class="statement" id="statement">
   <div class="wrap">
-    <p class="mono reveal" style="color:var(--red);margin:0">What I do</p>
-    <p class="big" id="big">I turn product briefs into scroll-stopping ads. UGC avatars, 3D animated stories and realistic AI, made in English, Filipino and Latin American Spanish.</p>
+    <div class="stmt">
+      <div>
+        <p class="mono reveal" style="color:var(--red);margin:0">What I do</p>
+        <p class="big" id="big">I turn product briefs into scroll-stopping ads. UGC avatars, 3D animated stories and realistic AI, made in English, Filipino and Latin American Spanish.</p>
+      </div>
+      <figure class="meet reveal">
+        <span class="meet-tag mono">Meet Jed</span>
+        <video src="https://jedleabres.github.io/asianjed.mp4#t=0.5" controls playsinline preload="metadata"></video>
+        <figcaption><b>AI Me Explains</b><span>An AI version of me walking through how I make UGC ads in Google Flow with Veo 3, from a starting image to finished clips.</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -595,7 +612,6 @@ const ADS = [
   { title: "Cherry Cardigan: 3D Animated Fashion Story", desc: "A 3D animated storybook ad about a tiny seamstress who discovers a cream cherry-embroidered cardigan in a glowing world of yarn, with sparkle reveals and close-ups that make the knit the hero.", kind: "3D animated", lang: "English", platform: "Instagram Reels", link: "", video: "https://jedleabres.github.io/ugcad.mp4", poster: "" },
   { title: "A Day in Her Life: Cinematic AI Drama", desc: "A 58-second emotional short that follows a grandmother from morning light to evening, told in warm autumn scenes with highlighted word-by-word captions.", kind: "Realistic AI", lang: "English", platform: "YouTube Shorts", link: "", video: "https://jedleabres.github.io/grandmadrama.mp4", poster: "" },
   { title: "Her Garden Routine: 3D Animated Wellness Story", desc: "A Pixar-style 3D animated story set to a song, following a woman through her daily wellness routine, from garden yoga and fresh herbs to a product reveal, with warm golden-hour scenes and highlighted word-by-word captions.", kind: "3D animated", tags: ["Song"], lang: "English", platform: "Facebook Reels", featured: true, client: true, badge: "3D animated", link: "", video: "https://jedleabres.github.io/assets/3d animation/3danim.mp4", poster: "" },
-  { title: "AI Me Explains: UGC Ads with Google Flow & Veo 3", desc: "An AI video of myself talking straight to camera, walking through how I create UGC ads in Google Flow with Veo 3: from a starting image to smooth video clips, with highlighted captions.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", featured: true, link: "", video: "https://jedleabres.github.io/asianjed.mp4", poster: "" },
   { title: "Things You Never Knew: What Happens When You Send a Message?", desc: "A 50-second 3D clay explainer that follows one text message from a tap on a phone to a friend's screen. It runs through handmade data beads, clay cell towers and cables across a seafloor diorama, with bold captions and handmade foley sounds.", kind: "3D animated", tags: ["Explainer"], lang: "English", platform: "TikTok", link: "", video: "https://jedleabres.github.io/assets/3d animation/clay_message_explainer.mp4", poster: "" },
   { title: "Meet Marcus: Gym Bro Comedy Skit", desc: "Realistic AI comedy short about a loud, muscle-bound gym regular, with deadpan narration and punchy highlighted captions built to hold attention to the last second.", kind: "Realistic AI", lang: "English", platform: "Facebook Reels", link: "", video: "https://jedleabres.github.io/gymbro.mp4", poster: "" }
 ];
