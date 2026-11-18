@@ -401,6 +401,22 @@ html.still .reveal{opacity:1;transform:none}
   <div class="wrap"><p class="cnote reveal">Every step was written up in a production bible: references, every prompt, the shot list, the edit timing and what broke along the way. Happy to walk you through it on a call.</p></div>
 </section>
 
+<section class="case" id="case-clay">
+  <div class="wrap">
+    <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">Case study · 3D clay explainer</p><h2 style="margin:0 0 16px">A clay anatomy ad,<br><span style="color:var(--mute)">four hooks, one body.</span></h2>
+    <p class="lead">A brand brief for NOVA's She Again: imitate a clay anatomy ad and explain why menopause belly fat won't shift. Built with ElevenLabs for the voice, kie.ai (Omni Flash) for the clay clips, Claude for the scripted edit and CapCut to finish.</p></div>
+    <div class="cgrid">
+      <div class="cstep reveal"><span class="mono">01 · Brief</span><h3>Same world, new story</h3><p>Kept the reference's look and pace: an open clay torso, a clay home and a black studio plinth for the product, with one big word on screen at a time.</p></div>
+      <div class="cstep reveal"><span class="mono">02 · Voice</span><h3>A voice from the brief</h3><p>Designed a calm British voice in her 50s in ElevenLabs from the brief's description, then tightened the pauses so a 2-minute script lands at 2:03.</p></div>
+      <div class="cstep reveal"><span class="mono">03 · Edit</span><h3>Cut on the words</h3><p>Every shot anchored to a word of the script, captions timed word by word, the reference's music bed kept under the voice, a whoosh each time the ad changes world.</p></div>
+      <div class="cstep reveal"><span class="mono">04 · Revise</span><h3>Notes in, new clips out</h3><p>Client notes on six moments: briefed seven new clay clips, re-cut the lines that didn't match, added movement to the still bottle shots, then copied the approved cut for every hook.</p></div>
+    </div>
+    <p class="mono reveal" style="color:var(--red);margin:48px 0 0">The full ad and three more hooks</p>
+  </div>
+  <div class="rail" id="clay-grid"></div>
+  <div class="wrap"><p class="cnote reveal">Each hook runs into the same 2-minute body, so the brand can test openers without paying for a new ad each time.</p></div>
+</section>
+
 <section class="morework" id="more">
   <div class="wrap">
     <div class="reveal"><p class="mono" style="color:var(--red);margin:0 0 10px">More work</p><h2 style="margin:0 0 16px">UGC, VSLs<br><span style="color:var(--mute)">and AI creators.</span></h2>
@@ -600,6 +616,7 @@ const ADS = [
   { front: true, title: "16 Pounds in 3 Weeks: Menopause Supplement Yapper", desc: "An 84-second direct-response ad for a menopause supplement. A three-panel before-to-after split shows the result in the first second, then a 47-year-old woman talks to camera while B-roll proves every line, with week-by-week pop-ups, red-X callouts and five hook variations on one body.", kind: "Realistic AI", tags: ["UGC"], lang: "English", platform: "Facebook Reels", featured: true, client: true, badge: "DR supplement ad", link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-yapper.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-yapper-poster.jpg" },
   { front: true, title: "Why Menopause Weight Won't Shift: 3-Minute VO + B-roll VSL", desc: "A full-script, 3-minute voice-over ad with a new lifestyle shot on every line and warm, simple animations (an umbrella, a fire, a rollercoaster) that explain the mechanism. Cool tones for pain, warm for relief, with ingredient callouts and five hook variations.", kind: "Realistic AI", tags: ["VSL"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-vo-broll.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-vo-broll-poster.jpg" },
   { front: true, title: "She Again: 76-Second VO with 3D Body Animations", desc: "A shorter voice-over ad for NOVA's She Again menopause supplement. It opens on a three-panel before-to-after split, then moves through her nights and mornings, an X-ray body showing estrogen drop, and close-up 3D shots of blood sugar, inflammation and a green coffee bean at work, closing on the 60-day guarantee and the product page.", kind: "Realistic AI", tags: ["VSL"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-nova14-vo.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-nova14-vo-poster.jpg" },
+  { front: true, title: "She Again: Inside Your Body After Menopause (Clay Anatomy)", desc: "A 2-minute claymation explainer for NOVA's She Again, imitating a clay anatomy ad. A calm British voice walks through an open clay torso to show why the belly grows after menopause: estrogen used to keep cortisol in check, and diets, cardio and detox teas can't put it back. It cuts between the torso, her clay kitchen and a black studio plinth, with one bold word on screen at a time.", kind: "3D animated", tags: ["Explainer"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-clay-anatomy.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-clay-anatomy-poster.jpg" },
   { front: true, title: "Mendoria: Scans Look Perfect, Doctor Story", desc: "A 5-minute doctor-story ad for Mendoria. An AI spinal rehab doctor walks through one patient whose L4-L5 fusion scans look perfect while a deep back muscle has shut down, with 3D anatomy shots, an honest recovery timeline and a 90-day trial close.", kind: "Realistic AI", tags: ["VSL"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/mendoria/mendoria-doctor-story.mp4", poster: "https://jedleabres.github.io/assets/mendoria/mendoria-doctor-story-poster.jpg" },
   { front: true, title: "Mendoria: 3 Signs of Spinal Stenosis", desc: "A 90-second paid trial for Mendoria, rebuilt beat for beat from a competitor ad. A presenter talks to a selfie camera and lists three signs of spinal stenosis while a second man acts out each one in B-roll, then a 3D spine shows the narrowed canal and weak deep muscles, before real product footage and AI shots of the pods on the body.", kind: "Realistic AI", tags: ["UGC"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/mendoria/mendoria-spinal-stenosis-3-signs.mp4", poster: "https://jedleabres.github.io/assets/mendoria/mendoria-spinal-stenosis-3-signs-poster.jpg" },
   { front: true, title: "Mendoria: The Catch-22, 3D Results Timeline", desc: "A 3D animated ad for Mendoria about the catch-22 of back pain: you need to move to heal, but moving hurts. It follows one patient week by week to show how the device breaks the loop, with a male voice-over.", kind: "3D animated", tags: ["Explainer"], lang: "English", platform: "Facebook Reels", client: true, link: "", video: "https://jedleabres.github.io/assets/mendoria/mendoria-3d-catch-22.mp4", poster: "https://jedleabres.github.io/assets/mendoria/mendoria-3d-catch-22-poster.jpg" },
@@ -633,6 +650,13 @@ const LATAM = [
 const JETCASE = [
   { title: "Hook 1: The Cash in the Trunk", desc: "Cold open on a flashlight sweeping cash and empty suitcases under police lights, then a hard cut to him saying his name. The first frame asks the question his story answers.", kind: "Realistic AI", tags: ["Hook"], lang: "English", platform: "Instagram Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/jet/jet-intro-hook2.mp4", poster: "https://jedleabres.github.io/assets/jet/jet-intro-hook2-trunk.jpg" },
   { title: "Hook 2: My Name Is Jet", desc: "Opens straight on him in a car at night, turning to the lens to introduce himself, with the highway lights sliding across his face.", kind: "Realistic AI", tags: ["Hook"], lang: "English", platform: "Instagram Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/jet/jet-intro-hook1.mp4", poster: "https://jedleabres.github.io/assets/jet/jet-intro-hook1.jpg" }
+];
+/* CLAY ANATOMY CASE STUDY (files in assets/she-again/) */
+const CLAYCASE = [
+  { title: "Full ad · Hook 1: Inside Your Body", desc: "This is what's happening inside your body after menopause. A slow push into the open clay torso, then the full 2-minute explainer.", kind: "3D animated", tags: ["Hook"], lang: "English", platform: "Facebook Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-clay-anatomy.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-clay-anatomy-poster.jpg" },
+  { title: "Hook 2: The Belly Bulges", desc: "The clay belly swells on the line about what menopause does to it, then cuts into the same body.", kind: "3D animated", tags: ["Hook"], lang: "English", platform: "Facebook Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook2.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook2-poster.jpg" },
+  { title: "Hook 3: The Tiny Plate", desc: "She eats from a tiny plate at her kitchen table: why the belly keeps growing even when you eat less.", kind: "3D animated", tags: ["Hook"], lang: "English", platform: "Facebook Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook3.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook3-poster.jpg" },
+  { title: "Hook 4: No Bread", desc: "She sits down to a meal with no bread on the plate: why cutting carbs won't shift a menopause belly.", kind: "3D animated", tags: ["Hook"], lang: "English", platform: "Facebook Reels", noSrc: true, link: "", video: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook4.mp4", poster: "https://jedleabres.github.io/assets/she-again/she-again-clay-hook4-poster.jpg" }
 ];
 /* CASE STUDY HOOKS (upload the files to assets/case-study/) */
 const CASE = [
@@ -745,6 +769,8 @@ const live = list => list.filter(a => safe(a.video) || safe(a.link)).sort((a, b)
   live(CASE).forEach(a => cr.appendChild(card(a)));
   const jr = document.getElementById('jet-grid');
   if (jr) live(JETCASE).forEach(a => jr.appendChild(card(a)));
+  const kr = document.getElementById('clay-grid');
+  if (kr) live(CLAYCASE).forEach(a => kr.appendChild(card(a)));
 })();
 (function buildLatam() {
   const lr = document.getElementById('latam-grid'), LIVE = live(LATAM);
